@@ -10,6 +10,11 @@
 		1F11FD471D8DD958008D59A6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FD461D8DD958008D59A6 /* main.swift */; };
 		1F11FD541D8DDC55008D59A6 /* NormanScriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FD531D8DDC55008D59A6 /* NormanScriptTests.swift */; };
 		1F11FD591D8DDD53008D59A6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FD461D8DD958008D59A6 /* main.swift */; };
+		1F11FD5B1D8E73AA008D59A6 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FD5A1D8E73AA008D59A6 /* SwiftExtensions.swift */; };
+		1F11FD5D1D8E7434008D59A6 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FD5C1D8E7434008D59A6 /* Shape.swift */; };
+		1F11FD5F1D8E74A9008D59A6 /* NormanTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FD5E1D8E74A9008D59A6 /* NormanTypes.swift */; };
+		1F11FD621D8E7580008D59A6 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FD611D8E7580008D59A6 /* Line.swift */; };
+		1F11FD641D8E7597008D59A6 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FD631D8E7597008D59A6 /* Circle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,6 +35,11 @@
 		1F11FD511D8DDC55008D59A6 /* NormanScriptTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NormanScriptTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F11FD531D8DDC55008D59A6 /* NormanScriptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormanScriptTests.swift; sourceTree = "<group>"; };
 		1F11FD551D8DDC55008D59A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1F11FD5A1D8E73AA008D59A6 /* SwiftExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftExtensions.swift; path = SourceCode/SwiftExtensions.swift; sourceTree = "<group>"; };
+		1F11FD5C1D8E7434008D59A6 /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Shape.swift; path = SourceCode/Shape.swift; sourceTree = "<group>"; };
+		1F11FD5E1D8E74A9008D59A6 /* NormanTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NormanTypes.swift; path = SourceCode/NormanTypes.swift; sourceTree = "<group>"; };
+		1F11FD611D8E7580008D59A6 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Line.swift; path = SourceCode/Line.swift; sourceTree = "<group>"; };
+		1F11FD631D8E7597008D59A6 /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Circle.swift; path = SourceCode/Circle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +82,10 @@
 			isa = PBXGroup;
 			children = (
 				1F11FD461D8DD958008D59A6 /* main.swift */,
+				1F11FD651D8E75A9008D59A6 /* Framework */,
+				1F11FD5A1D8E73AA008D59A6 /* SwiftExtensions.swift */,
+				1F11FD5C1D8E7434008D59A6 /* Shape.swift */,
+				1F11FD5E1D8E74A9008D59A6 /* NormanTypes.swift */,
 			);
 			path = NormanScript;
 			sourceTree = "<group>";
@@ -83,6 +97,23 @@
 				1F11FD551D8DDC55008D59A6 /* Info.plist */,
 			);
 			path = NormanScriptTests;
+			sourceTree = "<group>";
+		};
+		1F11FD601D8E7576008D59A6 /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				1F11FD611D8E7580008D59A6 /* Line.swift */,
+				1F11FD631D8E7597008D59A6 /* Circle.swift */,
+			);
+			name = Shapes;
+			sourceTree = "<group>";
+		};
+		1F11FD651D8E75A9008D59A6 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				1F11FD601D8E7576008D59A6 /* Shapes */,
+			);
+			name = Framework;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,7 +208,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F11FD5F1D8E74A9008D59A6 /* NormanTypes.swift in Sources */,
 				1F11FD471D8DD958008D59A6 /* main.swift in Sources */,
+				1F11FD5D1D8E7434008D59A6 /* Shape.swift in Sources */,
+				1F11FD5B1D8E73AA008D59A6 /* SwiftExtensions.swift in Sources */,
+				1F11FD621D8E7580008D59A6 /* Line.swift in Sources */,
+				1F11FD641D8E7597008D59A6 /* Circle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
