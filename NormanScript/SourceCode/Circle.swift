@@ -10,7 +10,7 @@ struct Circle {
     let center: Point
 }
 
-extension Circle: SVGExportSupport {
+extension Circle: Shape {
     //
     // <circle cx="125" cy="125" r="75" fill="orange" />
     //

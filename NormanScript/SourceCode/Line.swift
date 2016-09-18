@@ -10,7 +10,7 @@ struct Line {
     let end: Point
 }
 
-extension Line: SVGExportSupport {
+extension Line: Shape {
     //
     // <line x1="50" y1="50" x2="200" y2="200" stroke="blue" stroke-width="4" />
     //

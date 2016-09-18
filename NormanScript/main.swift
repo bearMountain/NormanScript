@@ -78,33 +78,27 @@ let l2 = Line(start: p(0, 300), end: p(800,0))
 let l3 = Line(start: p(33, 897), end: p(2000, 34))
 
 let lines = [l1, l2, l3]
-let shape = Shape(geometry: lines, color: "green", strokeWidth: 35)
+//let shape = Shape(geometry: lines, color: "green", strokeWidth: 35)
 
 //shape.generateSVG().addSVGTags().export()
 
 let c1 = Circle(diameter: 20, center: p(400, 400))
-Shape(geometry: [c1], color: "green", strokeWidth: 2).ship()
+let properties = ["stroke": "green", "stroke-width": 2, "fill": "clear" ] as [String : Any]
+Group(shapes: [c1], properties: properties).ship()
 
-// Shape -> Group
-// Geometry = [SVGExportable] -> 
 
-//
-//protocol Clothes: SVGExportSupport {
-//    
-//}
-//
-//struct Hat: Clothes {
-//    func generateSVG() -> String {
-//        return ""
-//    }
-//}
-//
-//
-//let shapes: [Clothes] = []
-//for shape in shapes {
-//    print(shape.generateSVG())
-//}
-//
-//
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

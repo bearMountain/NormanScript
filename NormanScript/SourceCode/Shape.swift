@@ -9,27 +9,28 @@ protocol SVGExportSupport {
     func generateSVG() -> String
 }
 
-class Shape: SVGExportSupport {
-    init(geometry: Geometry, color: Color, strokeWidth: Double) {
-        self.geometry = geometry
-        self.color = color
-        self.strokeWidth = strokeWidth
+protocol Shape: SVGExportSupport {
+    
+}
+
+
+class Group: Shape {
+    init(shapes: [Shape], properties: [String: Any]) {
+        self.shapes = shapes
+        self.properties = properties
     }
     
     func generateSVG() -> String {
-        let geometrySVG = geometry.map{$0.generateSVG()}.joined(separator: "\n")
-        let properties = ["stroke": color, "stroke-width": strokeWidth ] as [String : Any]
-        
+        let geometrySVG = shapes.map{$0.generateSVG()}.joined(separator: "\n")
         return geometrySVG.groupWithProperties(properties)
     }
     
     //MARK: - Private Vars
-    private var geometry: Geometry
-    private var color: Color
-    private var strokeWidth: Double
+    private var shapes: [Shape]
+    private var properties: [String: Any]
 }
 
-extension Shape {
+extension Group {
     func ship() {
         self.generateSVG().addSVGTags().export()
     }

@@ -4,7 +4,6 @@
 
 import Foundation
 
-typealias Geometry = [SVGExportSupport]
 typealias Color = String
 
 struct Point {
