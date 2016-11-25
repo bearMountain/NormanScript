@@ -4,13 +4,34 @@
 
 import Foundation
 
-typealias Color = String
-
-struct Point {
-    let x: Double
-    let y: Double
+//MARK: - Color
+struct Color {
+    var r: Double
+    var g: Double
+    var b: Double
 }
 
-func p(_ x: Double,_ y: Double) -> Point {
-    return Point(x: x, y: y)
+extension Color {
+    //
+    // "rgb(205,133,63)"
+    //
+    func generateSVG() -> String {
+        return "rgb(\(Int(r*255.0)),\(Int(g*255.0)),\(Int(b*255.0)))"
+    }
 }
+
+func c(_ r: Double, _ g: Double, _ b: Double) -> Color {
+    return Color(r: r, g: g, b: b)
+}
+
+//MARK: - DisplayProperties
+struct DisplayProperties {
+    let strokeColor: Color?
+    let strokeWidth: Double?
+    let fillColor: Color?
+}
+
+
+
+
+
