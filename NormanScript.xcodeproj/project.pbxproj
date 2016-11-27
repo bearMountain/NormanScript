@@ -13,10 +13,11 @@
 		1F11FD5B1D8E73AA008D59A6 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FD5A1D8E73AA008D59A6 /* SwiftExtensions.swift */; };
 		1F11FD5D1D8E7434008D59A6 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FD5C1D8E7434008D59A6 /* Shape.swift */; };
 		1F11FD5F1D8E74A9008D59A6 /* NormanTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FD5E1D8E74A9008D59A6 /* NormanTypes.swift */; };
-		1F11FD621D8E7580008D59A6 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FD611D8E7580008D59A6 /* Line.swift */; };
+		1F11FD621D8E7580008D59A6 /* LineSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FD611D8E7580008D59A6 /* LineSegment.swift */; };
 		1F11FD641D8E7597008D59A6 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FD631D8E7597008D59A6 /* Circle.swift */; };
 		1F39582A1DE7DCB50051F044 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3958291DE7DCB50051F044 /* Matrix.swift */; };
 		1F39582C1DE7E9580051F044 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F39582B1DE7E9580051F044 /* Point.swift */; };
+		1F39582E1DEA90D40051F044 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F39582D1DEA90D40051F044 /* Line.swift */; };
 		1F5C2BB71D9B012300BFA222 /* ExportFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C2BB61D9B012300BFA222 /* ExportFunctions.swift */; };
 		1F5C2BB91D9B02B200BFA222 /* MathFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C2BB81D9B02B200BFA222 /* MathFunctions.swift */; };
 /* End PBXBuildFile section */
@@ -42,10 +43,11 @@
 		1F11FD5A1D8E73AA008D59A6 /* SwiftExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftExtensions.swift; path = SourceCode/SwiftExtensions.swift; sourceTree = "<group>"; };
 		1F11FD5C1D8E7434008D59A6 /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Shape.swift; path = SourceCode/Shape.swift; sourceTree = "<group>"; };
 		1F11FD5E1D8E74A9008D59A6 /* NormanTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NormanTypes.swift; path = SourceCode/NormanTypes.swift; sourceTree = "<group>"; };
-		1F11FD611D8E7580008D59A6 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Line.swift; path = SourceCode/Line.swift; sourceTree = "<group>"; };
+		1F11FD611D8E7580008D59A6 /* LineSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LineSegment.swift; path = SourceCode/LineSegment.swift; sourceTree = "<group>"; };
 		1F11FD631D8E7597008D59A6 /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Circle.swift; path = SourceCode/Circle.swift; sourceTree = "<group>"; };
 		1F3958291DE7DCB50051F044 /* Matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Matrix.swift; path = SourceCode/Matrix.swift; sourceTree = "<group>"; };
 		1F39582B1DE7E9580051F044 /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Point.swift; path = SourceCode/Point.swift; sourceTree = "<group>"; };
+		1F39582D1DEA90D40051F044 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Line.swift; path = SourceCode/Line.swift; sourceTree = "<group>"; };
 		1F5C2BB61D9B012300BFA222 /* ExportFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExportFunctions.swift; path = SourceCode/ExportFunctions.swift; sourceTree = "<group>"; };
 		1F5C2BB81D9B02B200BFA222 /* MathFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MathFunctions.swift; path = SourceCode/MathFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,7 +109,8 @@
 		1F11FD601D8E7576008D59A6 /* Shapes */ = {
 			isa = PBXGroup;
 			children = (
-				1F11FD611D8E7580008D59A6 /* Line.swift */,
+				1F39582D1DEA90D40051F044 /* Line.swift */,
+				1F11FD611D8E7580008D59A6 /* LineSegment.swift */,
 				1F11FD631D8E7597008D59A6 /* Circle.swift */,
 			);
 			name = Shapes;
@@ -227,8 +230,9 @@
 				1F11FD5D1D8E7434008D59A6 /* Shape.swift in Sources */,
 				1F11FD5B1D8E73AA008D59A6 /* SwiftExtensions.swift in Sources */,
 				1F39582C1DE7E9580051F044 /* Point.swift in Sources */,
-				1F11FD621D8E7580008D59A6 /* Line.swift in Sources */,
+				1F11FD621D8E7580008D59A6 /* LineSegment.swift in Sources */,
 				1F11FD641D8E7597008D59A6 /* Circle.swift in Sources */,
+				1F39582E1DEA90D40051F044 /* Line.swift in Sources */,
 				1F5C2BB71D9B012300BFA222 /* ExportFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

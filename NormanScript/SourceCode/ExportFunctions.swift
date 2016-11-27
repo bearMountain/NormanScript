@@ -61,3 +61,8 @@ extension Array where Element: Shape {
         self.map{$0.generateSVG()}.joined(separator: "\n").addSVGTags().export()
     }
 }
+
+func ship(shapes: [Shape]) {
+    shapes.map{$0.generateSVG()}.joined(separator: "\n").addSVGTags().export()
+    print("Shipped sucka.")
+}

@@ -26,9 +26,9 @@ func c(_ r: Double, _ g: Double, _ b: Double) -> Color {
 
 //MARK: - DisplayProperties
 struct DisplayProperties {
-    let strokeColor: Color?
-    let strokeWidth: Double?
-    let fillColor: Color?
+    var strokeColor: Color?
+    var strokeWidth: Double?
+    var fillColor: Color?
 }
 
 

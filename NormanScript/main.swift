@@ -142,26 +142,76 @@ let ExportPath = "/Users/jeff/Desktop/test.svg"
 //let twoUp = rotate(point: twoOut, aroundPoint: origin, delta: Double.pi.half.half)
 //print(twoUp)
 
-func rotate(point: Point, aroundPoint: Point, delta: Double) -> Point {
-    let transformMatrix = m([
-        [cos(delta), sin(delta)],
-        [-sin(delta), cos(delta)]
-        ])
-    let pointToMove = m(point)
-    let axisPoint = m(aroundPoint)
+//func rotate(point: Point, aroundPoint: Point, delta: Double) -> Point {
+//    let transformMatrix = m([
+//        [cos(delta), sin(delta)],
+//        [-sin(delta), cos(delta)]
+//        ])
+//    let pointToMove = m(point)
+//    let axisPoint = m(aroundPoint)
+//    
+//    let resultMatrix = transformMatrix*(pointToMove-axisPoint) + axisPoint
+//    
+//    return p(resultMatrix)
+//}
+
+
+let segmentLength = 3.0
+let translatedOrigin = p(600, 500)
+let origin = p(0,0)
+let strokeColor = c(0,0,0)
+let strokeWidth = 1.0
+
+var s1 = LineSegment(start: p(segmentLength, 0), end: origin, strokeColor: strokeColor, strokeWidth: strokeWidth)
+var l1 = Line(segments: [s1])
+
+for i in 0..<14 {
+    // Duplicate Line
+    var l2 = l1
     
-    let resultMatrix = transformMatrix*(pointToMove-axisPoint) + axisPoint
+    // Rotate Line around previous line endpoint
+    l2.rotate(degree: Double.pi.half, aroundPoint: l1.endpoint)
     
-    return p(resultMatrix)
+    // Reverse l2 point ordering
+    l2.reverse()
+    
+    // Join lines
+    l1 = Line(segments: l1.segments+l2.segments)
 }
 
 
-let segmentLength = 10.0
-let origin = p(300, 300)
+var color = c(0,1,0.5)
+let colorIncriment = 1.0/Double(l1.segments.count)
+for i in 0..<l1.segments.count {
+    l1.segments[i].displayProperties?.strokeColor = color
+    color.r += colorIncriment
+    color.g -= colorIncriment
+    color.b += colorIncriment.half
+}
 
-let s1 = LineSegment(start: p(0,0), end: p(segmentLength, 0), strokeColor: c(0,0,0), strokeWidth: 5)
+var l3 = l1
+l3.rotate(degree: Double.pi.half.half, aroundPoint: origin)
+l3.translate(translatedOrigin)
 
-[s1].ship()
+
+l1.translate(translatedOrigin)
+
+ship(shapes: [l1, l3])
+
+//var s2 = s1
+//s2.rotate(degree: Double.pi.half, aroundPoint: s1.start)
+//
+//var l1 = Line(segments: [s1,s2])
+//var l2 = l1
+//l2.translate(x: 10, y: 10)
+////l2.rotate(degree: Double.pi.half, aroundPoint: p(300,300))
+//
+//ship(shapes: [l1, l2])
+//let lines: Array<Shape> = [l1]
+//lines.ship()
+
+
+//[s1, s2].ship()
 
 
 
