@@ -29,6 +29,10 @@ extension Point {
         self.y += y
     }
     
+    mutating func translate(_ point: Point) {
+        translate(x: point.x, y: point.y)
+    }
+    
     mutating func rotate(degree: Double, aroundPoint pivot: Point) {
         let transformMatrix = m([
             [cos(degree), sin(degree)],
@@ -41,6 +45,16 @@ extension Point {
         
         self.x = resultMatrix[0,0]
         self.y = resultMatrix[1,0]
+    }
+    
+    mutating func mirror(plane: LineSegment) {
+        let m = (plane.start.y-plane.end.y)/(plane.start.x-plane.end.x)
+        let b = plane.start.y-m*plane.start.x
+        
+        let d = (x + m*(y-b)) / (1 + m.squared)
+        
+        x = 2*d - x
+        y = 2*d*m - y + 2*b
     }
 }
 

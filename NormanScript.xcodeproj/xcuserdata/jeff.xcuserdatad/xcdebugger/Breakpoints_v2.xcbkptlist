@@ -9,12 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NormanScript/main.swift"
-            timestampString = "501913864.705142"
+            filePath = "NormanScript/SourceCode/Polygon.swift"
+            timestampString = "502230294.745458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179">
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "mirror(plane:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -23,12 +25,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NormanScript/main.swift"
-            timestampString = "501912851.577625"
+            filePath = "NormanScript/SourceCode/Point.swift"
+            timestampString = "502230517.68875"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165">
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "mirror(plane:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

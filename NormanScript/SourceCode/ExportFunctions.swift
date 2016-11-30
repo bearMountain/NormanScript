@@ -66,3 +66,7 @@ func ship(shapes: [Shape]) {
     shapes.map{$0.generateSVG()}.joined(separator: "\n").addSVGTags().export()
     print("Shipped sucka.")
 }
+
+func ship(_ shape: Shape) {
+    ship(shapes: [shape])
+}
