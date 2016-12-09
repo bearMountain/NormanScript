@@ -6,7 +6,6 @@ Code in [Xcode](https://developer.apple.com/xcode/), export to [.stl](https://en
 ##Generate mechanical models
 
 <img src="https://github.com/bearMountain/NormanScript/blob/master/GitResources/Screen%20Shot%202016-12-09%20at%2011.26.26%20AM.png" width="500">
-<br><br><br>
 
 ##Using precise measurements and mathematics
 ```
@@ -30,7 +29,6 @@ for i in 0..<5 {
 ##Or generate intricate drawings 
 
 <img src="https://github.com/bearMountain/NormanScript/blob/master/GitResources/Screen%20Shot%202016-12-09%20at%2011.02.52%20AM.png" width="500">
-<br><br><br>
 
 
 ##Using elegant code
