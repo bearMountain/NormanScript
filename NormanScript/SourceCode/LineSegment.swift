@@ -18,6 +18,14 @@ struct LineSegment {
 }
 
 extension LineSegment: Shape {
+    mutating internal func mirror(plane: LineSegment) {
+        
+    }
+
+    mutating internal func translate(_ point: Point) {
+        
+    }
+
     //
     // <line x1="50" y1="50" x2="200" y2="200" stroke="blue" stroke-width="4" />
     //
@@ -50,9 +58,9 @@ extension LineSegment: Shape {
         return self
     }
     
-    mutating func rotate(degree: Double, aroundPoint pivot: Point) {
-        start.rotate(degree: degree, aroundPoint: pivot)
-        end.rotate(degree: degree, aroundPoint: pivot)
+    mutating func rotate(radians: Double, aroundPoint pivot: Point) {
+        start.rotate(radians: radians, aroundPoint: pivot)
+        end.rotate(radians: radians, aroundPoint: pivot)
     }
     
     mutating func reverse() {

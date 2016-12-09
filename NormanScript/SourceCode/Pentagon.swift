@@ -5,6 +5,11 @@
 import Foundation
 
 struct Pentagon: Shape {
+    
+    public var points: [Point] {
+        return polygon.points
+    }
+    var center: Point = .origin
 
     init(radius: Double) {
         let origin = p(0,0)
@@ -16,7 +21,7 @@ struct Pentagon: Shape {
         
         for i in 1..<5 {
             var p2 = p1
-            p2.rotate(degree: delta*Double(i), aroundPoint: origin)
+            p2.rotate(radians: delta*Double(i), aroundPoint: origin)
             points.append(p2)
         }
         
@@ -31,13 +36,16 @@ struct Pentagon: Shape {
     
     mutating func translate(_ point: Point) {
         polygon.translate(point)
+        center.translate(point)
     }
     
     mutating func rotate(radians: Double, aroundPoint point: Point) {
         polygon.rotate(radians: radians, aroundPoint: point)
+        center.rotate(radians: radians, aroundPoint: point)
     }
     
     mutating func mirror(plane: LineSegment) {
         polygon.mirror(plane: plane)
+        center.mirror(plane: plane)
     }
 }

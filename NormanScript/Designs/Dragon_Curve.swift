@@ -5,21 +5,21 @@
 import Foundation
 
 func makeDragonCurve() {
-    let segmentLength = 3.0
-    let translatedOrigin = p(600, 500)
+    let segmentLength = 5.0
+    let translatedOrigin = p(600, 300)
     let origin = p(0,0)
     let strokeColor = c(0,0,0)
-    let strokeWidth = 2.0
+    let strokeWidth = 1.5
     
     let s1 = LineSegment(start: p(segmentLength, 0), end: origin, strokeColor: strokeColor, strokeWidth: strokeWidth)
     var l1 = Line(segments: [s1])
     
-    for _ in 0..<14 {
+    for _ in 0..<12 {
         // Duplicate Line
         var l2 = l1
         
         // Rotate Line around previous line endpoint
-        l2.rotate(degree: Double.pi.half, aroundPoint: l1.endpoint)
+        l2.rotate(radians: Double.pi.half, aroundPoint: l1.endpoint)
         
         // Reverse l2 point ordering
         l2.reverse()
@@ -39,7 +39,7 @@ func makeDragonCurve() {
     }
     
     var l3 = l1
-    l3.rotate(degree: Double.pi.half.half, aroundPoint: origin)
+    l3.rotate(radians: Double.pi.half.half, aroundPoint: origin)
     l3.translate(translatedOrigin)
     
     

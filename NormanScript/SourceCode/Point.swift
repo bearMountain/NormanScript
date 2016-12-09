@@ -33,10 +33,10 @@ extension Point {
         translate(x: point.x, y: point.y)
     }
     
-    mutating func rotate(degree: Double, aroundPoint pivot: Point) {
+    mutating func rotate(radians: Double, aroundPoint pivot: Point) {
         let transformMatrix = m([
-            [cos(degree), sin(degree)],
-            [-sin(degree), cos(degree)]
+            [cos(radians), sin(radians)],
+            [-sin(radians), cos(radians)]
             ])
         let pointToMove = m(self)
         let axisPoint = m(pivot)
@@ -55,6 +55,12 @@ extension Point {
         
         x = 2*d - x
         y = 2*d*m - y + 2*b
+    }
+}
+
+extension Point {
+    static var origin: Point {
+        return p(0,0)
     }
 }
 

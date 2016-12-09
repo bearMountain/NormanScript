@@ -5,7 +5,7 @@
 import Foundation
 
 struct Geometry {
-    static var origin: Point {
-        return p(0,0)
-    }
+//    static var origin: Point {
+//        return p(0,0)
+//    }
 }

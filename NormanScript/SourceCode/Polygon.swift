@@ -17,7 +17,7 @@ extension Polygon: Shape {
     //   <polygon points="200,10 250,190 160,210" style="fill:lime;stroke:purple;stroke-width:1" />
     //
     func generateSVG() -> String {
-        let beginning = "<polygon points=\""
+        let beginning = "<polyline points=\""
         var pointsString = ""
         
         for point in points {
@@ -51,7 +51,7 @@ extension Polygon {
     
     mutating func rotate(radians: Double, aroundPoint point: Point) {
         for i in 0..<points.count {
-            points[i].rotate(degree: radians, aroundPoint: point)
+            points[i].rotate(radians: radians, aroundPoint: point)
         }
     }
     
