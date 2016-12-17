@@ -56,6 +56,11 @@ extension Point {
         x = 2*d - x
         y = 2*d*m - y + 2*b
     }
+    
+    mutating func scale(_ factor: Double) {
+        x = x*factor
+        y = y*factor
+    }
 }
 
 extension Point {

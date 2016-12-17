@@ -13,6 +13,7 @@ protocol Shape: SVGExportSupport {
     mutating func translate(_ point: Point)
     mutating func mirror(plane: LineSegment)
     mutating func rotate(radians: Double, aroundPoint point: Point)
+    mutating func scale(_ factor: Double)
 }
 
 

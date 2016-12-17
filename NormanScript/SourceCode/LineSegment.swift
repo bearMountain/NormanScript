@@ -18,6 +18,10 @@ struct LineSegment {
 }
 
 extension LineSegment: Shape {
+    mutating internal func scale(_ factor: Double) {
+        
+    }
+
     mutating internal func mirror(plane: LineSegment) {
         
     }

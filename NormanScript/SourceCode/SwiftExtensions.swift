@@ -12,4 +12,16 @@ extension Double {
     var squared: Double {
         return pow(self, 2)
     }
+    
+    var radians: Double {
+        return self*Double.pi / 180.0
+    }
+}
+
+extension Array {
+    mutating func mutate(f: (inout Element)->()) {
+        for i in 0..<self.count {
+            f(&self[i])
+        }
+    }
 }

@@ -6,244 +6,204 @@ import Foundation
 
 let ExportPath = "/Users/jeff/Desktop/test.svg"
 
-////////////////////////////////////////////////////////////////////////////////
-// Sample SVG
-////////////////////////////////////////////////////////////////////////////////
-
-//<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-//<rect x="25" y="25" width="200" height="200" fill="lime" stroke-width="4" stroke="pink" />
-//<circle cx="125" cy="125" r="75" fill="orange" />
-//<polyline points="50,150 50,200 200,200 200,100" stroke="red" stroke-width="4" fill="none" />
-//<line x1="50" y1="50" x2="200" y2="200" stroke="blue" stroke-width="4" />
-//</svg>
-
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-// Bezier
-////////////////////////////////////////////////////////////////////////////////
-
-//let insetZero = 100.0
-//let l1Start = p(insetZero, insetZero)
-//let l1End = p(600, insetZero)
-//let l2Start = p(300 , 300)
-//let l2End = p(insetZero, insetZero)
-//
-//let circleDiameter = 10.0
-//let c1 = Circle(diameter: circleDiameter, center: l1Start)
-//let c2 = Circle(diameter: circleDiameter, center: l1End)
-//let c3 = Circle(diameter: circleDiameter, center: l2Start)
-//let c4 = Circle(diameter: circleDiameter, center: l2End)
-//
-//let l1 = Line(start: l1Start, end: l1End)
-//let l2 = Line(start: l2Start, end: l2End)
-//
-//
-//
-
-func interpolatedPoint(startPoint p_0: Point, endPoint p_1: Point, distance d: Double) -> Point {
-    let fullLength = dist(startPoint: p_0, endPoint: p_1)
-    let t = d / fullLength // Ratio
-    
-    // (xt,yt)=(((1−t)x0+tx1),((1−t)y0+ty1))
-    let x_t = (1-t)*p_0.x + t*p_1.x
-    let y_t = (1-t)*p_0.y + t*p_1.y
-    
-    return p(x_t, y_t)
-}
-
-//
-//func interpolatedPoint(line: Line, distance d: Double) -> Point {
-//    return interpolatedPoint(startPoint: line.start, endPoint: line.end, distance: d)
-//}
-//
-//let steps = 100.0
-//let ratio = 1/steps
-//let l1_d = l1.length
-//let l2_d = l2.length
-//let l1_step = l1_d * ratio
-//let l2_step = l2_d * ratio
-//
-//var baseColor = c(0,1,0.5)
-//var strokeWidth = 0.6
-//
-//var newCircles: [Shape] = []
-//var newLines: [Shape] = []
-//for i in 1..<Int(steps) {
-//    let i_d_type = Double(i)
-//    let l1_i = interpolatedPoint(line: l1, distance: i_d_type * l1_step)
-//    let l2_i = interpolatedPoint(line: l2, distance: i_d_type * l2_step)
-//    
-//    baseColor.r += 0.01
-//    baseColor.g -= 0.01
-//    baseColor.b += 0.005
-//    
-//    strokeWidth -= 0.005
-//    
-//    let lb_i = Line(start: l2_i, end: l1_i, strokeColor: baseColor, strokeWidth: strokeWidth)
-//    let b_i = interpolatedPoint(line: lb_i, distance: lb_i.length * i_d_type * ratio)
-//    
-//    let newC1 = Circle(diameter: circleDiameter, center: l1_i)
-//    let newC2 = Circle(diameter: circleDiameter, center: l2_i)
-//    let c_b = Circle(diameter: circleDiameter, center: b_i)
-//    
-//    newCircles.append(newC1)
-//    newCircles.append(newC2)
-//    newCircles.append(c_b)
-//    
-//    newLines.append(lb_i)
-//}
-//
-//
-//
-//
-//let properties = ["stroke": "gray", "stroke-width": 1, "fill": "clear" ] as [String : Any]
-//let lines: [Shape] = [l1, l2]
-//let circles: [Shape] = [c1, c2, c3, c4]
-////let shapes = lines+circles+newCircles+newLines
-//let shapes = newLines
-//Group(shapes: shapes, properties: [:]).ship()
-
-///
-//let ll1 = Line(start: p(100, 100), end: p(700, 700), strokeColor: c(1,0.35,0), strokeWidth: 2)
-//let ll2 = Line(start: p(100, 500), end: p(500, 600), strokeColor: c(0,1,0.911), strokeWidth: 4)
-//
-//[ll1, ll2].map{$0.generateSVG()}.joined(separator: "\n").addSVGTags().export()
-
-
-
-
-
-//let s1 = LineSegment(start: p(100, 100), end: p(150,100), strokeColor: nil, strokeWidth: nil, fillColor: nil)
-//let s2 = LineSegment(start: p(100, 100), end: p(100, 150), strokeColor: nil, strokeWidth: nil, fillColor: nil)
-//
-//let line1 = s1 + s2
-//let line2 = line1.rotated(90)
-
-
-//let twoByTwo = m([[1,2],[3,4]])
-//let twoByOne = m([5,6])
-//
-//let result = twoByTwo*twoByOne
-//print(result)
-//
-//let p1 = m([5,5])
-//let p2 = m([6,2])
-//let p3 = p1-p2
-//print(p3)
-//
-//
-//
-//
-//let origin = p(2,2)
-//let twoOut = p(4,2)
-//let twoUp = rotate(point: twoOut, aroundPoint: origin, delta: Double.pi.half.half)
-//print(twoUp)
-
-//func rotate(point: Point, aroundPoint: Point, delta: Double) -> Point {
-//    let transformMatrix = m([
-//        [cos(delta), sin(delta)],
-//        [-sin(delta), cos(delta)]
-//        ])
-//    let pointToMove = m(point)
-//    let axisPoint = m(aroundPoint)
-//    
-//    let resultMatrix = transformMatrix*(pointToMove-axisPoint) + axisPoint
-//    
-//    return p(resultMatrix)
-//}
-
-//var s2 = s1
-//s2.rotate(degree: Double.pi.half, aroundPoint: s1.start)
-//
-//var l1 = Line(segments: [s1,s2])
-//var l2 = l1
-//l2.translate(x: 10, y: 10)
-////l2.rotate(degree: Double.pi.half, aroundPoint: p(300,300))
-//
-//ship(shapes: [l1, l2])
-//let lines: Array<Shape> = [l1]
-//lines.ship()
-
-
-//[s1, s2].ship()
-
-/////////////////////////////////////////////////
-
-//let polyLines = [p(0,0), p(100,100), p(100,200)]
-//var triangle = Polygon(points: polyLines)
-//triangle.translate(p(100,100))
-//ship(triangle)
-
-func pentagonFlower() -> [Pentagon] {
-    let pentagon = Pentagon(radius: 100)
-    let delta = Double.pi*2/5
-    
-    var flower: [Pentagon] = []
-    
-    for i in 0..<5 {
-        let j1 = i
-        let j2 = (i+1) < 5 ? i+1 : 0
-        let plane = LineSegment(start: pentagon.points[j1], end: pentagon.points[j2])
-        var p1 = pentagon
-        p1.rotate(radians: delta*Double(i+1), aroundPoint: .origin)
-        p1.mirror(plane: plane)
-        flower.append(p1)
+struct Trapezoid: Shape {
+    var corners: [Point]
+    var cornerRadius: Double = 0
+    var maxY: Double {
+        var maxY = corners[0].y
+        for corner in corners {
+            maxY = max(maxY, corner.y)
+        }
+        return maxY
+    }
+    var minY: Double {
+        var minY = corners[0].y
+        for corner in corners {
+            minY = min(minY, corner.y)
+        }
+        return minY
     }
     
-    return flower
-}
-
-func dodecahedronFlatPack() -> [Shape] {
-    var flower1 = pentagonFlower()
-    var flower2 = flower1
-    
-    let petal = flower2[3]
-    let p1 = petal.points[1]
-    let p2 = petal.points[2]
-    let distance = dist(startPoint: p1, endPoint: p2)/2.0
-    let junctureCenter = interpolatedPoint(startPoint: p1, endPoint: p2, distance: distance)
-    var junctureCircle: Shape = Circle(diameter: 10, center: junctureCenter)
-    
-    flower2.mutate { shape in
-        shape.rotate(radians: Double.pi, aroundPoint: junctureCenter)
+    func generateSVG() -> String {
+        // Helper Funcs
+        func S(controlPoint: Point, endPoint: Point) -> String {
+            return "S\(controlPoint.x),\(controlPoint.y) \(endPoint.x),\(endPoint.y)"
+        }
+        
+        func L(_ point: Point) -> String {
+            return "L\(point.x),\(point.y)"
+        }
+        
+        // Trapezoid Sanity Check
+        if (corners.count != 4) {
+            assertionFailure("Trapezoid must have 4 corners.")
+        }
+        
+        // Path Generation
+        let pathStringStart = "<path d=\""
+        let pathStringEnd = "z\" fill=\"none\" stroke=\"black\" stroke-width=\"1\" />"
+        var path = ""
+        let radius = cornerRadius
+        
+        let p0_1 = interpolatedPoint(startPoint: corners[0], endPoint: corners[3], distance: radius)
+        let p0_2 = interpolatedPoint(startPoint: corners[0], endPoint: corners[1], distance: radius)
+        
+        let p1_1 = interpolatedPoint(startPoint: corners[1], endPoint: corners[0], distance: radius)
+        let p1_2 = interpolatedPoint(startPoint: corners[1], endPoint: corners[2], distance: radius)
+        
+        let p2_1 = interpolatedPoint(startPoint: corners[2], endPoint: corners[1], distance: radius)
+        let p2_2 = interpolatedPoint(startPoint: corners[2], endPoint: corners[3], distance: radius)
+        
+        let p3_1 = interpolatedPoint(startPoint: corners[3], endPoint: corners[2], distance: radius)
+        let p3_2 = interpolatedPoint(startPoint: corners[3], endPoint: corners[0], distance: radius)
+        
+        path += "M\(p0_1.x),\(p0_1.y)"
+        path += S(controlPoint: corners[0], endPoint: p0_2)
+        path += L(p1_1)
+        path += S(controlPoint: corners[1], endPoint: p1_2)
+        path += L(p2_1)
+        path += S(controlPoint: corners[2], endPoint: p2_2)
+        path += L(p3_1)
+        path += S(controlPoint: corners[3], endPoint: p3_2)
+        
+        return pathStringStart + path + pathStringEnd
     }
     
-    // Center on screen
-    let originShift = p(800,300)
-    
-    flower1.mutate { shape in
-        shape.translate(originShift)
-    }
-    flower2.mutate { shape in
-        shape.translate(originShift)
+    mutating func translate(_ point: Point) {
+        corners.mutate { corner in
+            corner.translate(point)
+        }
     }
     
-    junctureCircle.translate(originShift)
+    func rotate(radians: Double, aroundPoint point: Point) {
+        
+    }
     
+    func mirror(plane: LineSegment) {
+        
+    }
     
-    return flower1+flower2
+    mutating func scale(_ factor: Double) {
+        corners.mutate { corner in
+            corner.scale(factor)
+        }
+    }
 }
 
 
+struct MainFace {
+    static let taper = 14.5
+    static let bottomWidth = 30.0
+    static let height = 42.625
+}
 
-//var f = pentagonFlower()
-//let originShift = p(800,300)
-//
-//f.mutate { shape in
-//    shape.translate(originShift)
-//}
+struct BottomCutout {
+    static let width = 25.125
+    static let height = 8.6875
+    static let radius = 4.0
+    static let bottomSpacer = 1.0
+}
 
-//ship(shapes: f)
-//ship(shapes: dodecahedronFlatPack())
-makeDragonCurve()
+struct MiddleCutout {
+    static let width = 19.625
+    static let height = 11.5625
+    static let bottomSpacer = 2.0
+}
 
 
+func trapezoid(topWidth: Double, bottomWidth: Double, height: Double) -> Trapezoid {
+    let corners = [
+        p(-bottomWidth.half, height),
+        p(-topWidth.half, 0),
+        p(topWidth.half, 0),
+        p(bottomWidth.half, height)
+    ]
+    
+    return Trapezoid(corners: corners, cornerRadius: 0)
+}
 
+func trapezoid(bottomWidth: Double, height: Double, taper: Double) -> Trapezoid {
+    let cuttofWidth = tan(taper.radians)*height
+    
+    let corners = [
+        p(-bottomWidth.half, height),
+        p(-bottomWidth.half+cuttofWidth, 0),
+        p(bottomWidth.half-cuttofWidth, 0),
+        p(bottomWidth.half, height)
+    ]
+    
+    return Trapezoid(corners: corners, cornerRadius: 0)
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Construction ///////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Main
+var mainFace = trapezoid(bottomWidth: MainFace.bottomWidth, height: MainFace.height, taper: MainFace.taper)
+
+// Bottom Cutout
+var bottomCutout = trapezoid(bottomWidth: BottomCutout.width, height: BottomCutout.height, taper: MainFace.taper)
+bottomCutout.cornerRadius = BottomCutout.radius
+bottomCutout.translate(p(0, MainFace.height-BottomCutout.height-BottomCutout.bottomSpacer))
+
+// Middle Cutout
+var middleCutout = trapezoid(bottomWidth: MiddleCutout.width, height: MiddleCutout.height, taper: MainFace.taper)
+middleCutout.cornerRadius = BottomCutout.radius
+middleCutout.translate(p(0, bottomCutout.minY-MiddleCutout.height-MiddleCutout.bottomSpacer))
+
+// Slits
+func slit(vertSpacer: Double) -> Trapezoid {
+    let slitHeight = 1.0
+    let newEdgePoint = interpolatedPoint(startPoint: middleCutout.corners[0], endPoint: middleCutout.corners[1], distanceFromEndpoint: -vertSpacer)
+    let slitWidth = newEdgePoint.x*(-2.0)
+    var slit = trapezoid(bottomWidth: slitWidth, height: slitHeight, taper: MainFace.taper)
+    slit.cornerRadius = BottomCutout.radius
+    slit.translate(p(0, newEdgePoint.y-slitHeight))
+    
+    return slit
+}
+
+let slit1 = slit(vertSpacer: 4)
+let slit2 = slit(vertSpacer: 8)
+let slit3 = slit(vertSpacer: 12)
+let slit4 = slit(vertSpacer: 16)
+
+// Assembly
+var completedFace: [Shape] = [mainFace, bottomCutout, middleCutout, slit1, slit2, slit3, slit4]
+
+// Sheet
+let sheetWidth = 48.0
+let sheetHeight = 96.0
+var sheet: Shape = Polygon(points: [
+    .origin,
+    p(sheetWidth, 0),
+    p(sheetWidth, sheetHeight),
+    p(0, sheetHeight)
+])
+sheet.translate(p(-sheetWidth.half, 0))
+
+var everything = [sheet] + completedFace
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Display Helpers ////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+let scaleFactor = 10.0
+let inset = 20.0
+
+everything.mutate { piece in
+    piece.scale(scaleFactor)
+    piece.translate(p(MainFace.bottomWidth.half*scaleFactor+inset, inset))
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Export /////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ship(shapes: everything)
 
 
 

@@ -5,7 +5,6 @@
 import Foundation
 
 struct Pentagon: Shape {
-    
     public var points: [Point] {
         return polygon.points
     }
@@ -47,5 +46,8 @@ struct Pentagon: Shape {
     mutating func mirror(plane: LineSegment) {
         polygon.mirror(plane: plane)
         center.mirror(plane: plane)
+    }
+    
+    mutating func scale(_ factor: Double) {
     }
 }

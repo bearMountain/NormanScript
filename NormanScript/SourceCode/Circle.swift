@@ -11,6 +11,10 @@ struct Circle {
 }
 
 extension Circle: Shape {
+    mutating internal func scale(_ factor: Double) {
+        
+    }
+
     mutating internal func translate(_ point: Point) {
         center.translate(point)
     }

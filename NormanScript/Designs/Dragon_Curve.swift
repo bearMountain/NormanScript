@@ -14,12 +14,12 @@ func makeDragonCurve() {
     let s1 = LineSegment(start: p(segmentLength, 0), end: origin, strokeColor: strokeColor, strokeWidth: strokeWidth)
     var l1 = Line(segments: [s1])
     
-    for _ in 0..<12 {
+    for _ in 0..<10 {
         // Duplicate Line
         var l2 = l1
         
         // Rotate Line around previous line endpoint
-        l2.rotate(radians: Double.pi.half, aroundPoint: l1.endpoint)
+        l2.rotate(radians: Double.pi.half*1.2, aroundPoint: l1.endpoint)
         
         // Reverse l2 point ordering
         l2.reverse()
