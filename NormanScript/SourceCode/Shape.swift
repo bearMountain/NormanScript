@@ -5,15 +5,22 @@
 import Foundation
 
 
-protocol SVGExportSupport {
+protocol SVGExportable {
     func generateSVG() -> String
 }
 
-protocol Shape: SVGExportSupport {
+protocol Translatable {
     mutating func translate(_ point: Point)
     mutating func mirror(plane: LineSegment)
     mutating func rotate(radians: Double, aroundPoint point: Point)
     mutating func scale(_ factor: Double)
+}
+
+protocol Locatable {
+    var maxY: Double { get }
+    var minY: Double { get }
+    var maxX: Double { get }
+    var minX: Double { get }
 }
 
 

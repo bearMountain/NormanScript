@@ -6,89 +6,7 @@ import Foundation
 
 let ExportPath = "/Users/jeff/Desktop/test.svg"
 
-struct Trapezoid: Shape {
-    var corners: [Point]
-    var cornerRadius: Double = 0
-    var maxY: Double {
-        var maxY = corners[0].y
-        for corner in corners {
-            maxY = max(maxY, corner.y)
-        }
-        return maxY
-    }
-    var minY: Double {
-        var minY = corners[0].y
-        for corner in corners {
-            minY = min(minY, corner.y)
-        }
-        return minY
-    }
-    
-    func generateSVG() -> String {
-        // Helper Funcs
-        func S(controlPoint: Point, endPoint: Point) -> String {
-            return "S\(controlPoint.x),\(controlPoint.y) \(endPoint.x),\(endPoint.y)"
-        }
-        
-        func L(_ point: Point) -> String {
-            return "L\(point.x),\(point.y)"
-        }
-        
-        // Trapezoid Sanity Check
-        if (corners.count != 4) {
-            assertionFailure("Trapezoid must have 4 corners.")
-        }
-        
-        // Path Generation
-        let pathStringStart = "<path d=\""
-        let pathStringEnd = "z\" fill=\"none\" stroke=\"black\" stroke-width=\"1\" />"
-        var path = ""
-        let radius = cornerRadius
-        
-        let p0_1 = interpolatedPoint(startPoint: corners[0], endPoint: corners[3], distance: radius)
-        let p0_2 = interpolatedPoint(startPoint: corners[0], endPoint: corners[1], distance: radius)
-        
-        let p1_1 = interpolatedPoint(startPoint: corners[1], endPoint: corners[0], distance: radius)
-        let p1_2 = interpolatedPoint(startPoint: corners[1], endPoint: corners[2], distance: radius)
-        
-        let p2_1 = interpolatedPoint(startPoint: corners[2], endPoint: corners[1], distance: radius)
-        let p2_2 = interpolatedPoint(startPoint: corners[2], endPoint: corners[3], distance: radius)
-        
-        let p3_1 = interpolatedPoint(startPoint: corners[3], endPoint: corners[2], distance: radius)
-        let p3_2 = interpolatedPoint(startPoint: corners[3], endPoint: corners[0], distance: radius)
-        
-        path += "M\(p0_1.x),\(p0_1.y)"
-        path += S(controlPoint: corners[0], endPoint: p0_2)
-        path += L(p1_1)
-        path += S(controlPoint: corners[1], endPoint: p1_2)
-        path += L(p2_1)
-        path += S(controlPoint: corners[2], endPoint: p2_2)
-        path += L(p3_1)
-        path += S(controlPoint: corners[3], endPoint: p3_2)
-        
-        return pathStringStart + path + pathStringEnd
-    }
-    
-    mutating func translate(_ point: Point) {
-        corners.mutate { corner in
-            corner.translate(point)
-        }
-    }
-    
-    func rotate(radians: Double, aroundPoint point: Point) {
-        
-    }
-    
-    func mirror(plane: LineSegment) {
-        
-    }
-    
-    mutating func scale(_ factor: Double) {
-        corners.mutate { corner in
-            corner.scale(factor)
-        }
-    }
-}
+
 
 
 struct MainFace {
@@ -108,6 +26,10 @@ struct MiddleCutout {
     static let width = 19.625
     static let height = 11.5625
     static let bottomSpacer = 2.0
+}
+
+struct Side {
+    static let width = MainFace.bottomWidth * 0.8
 }
 
 
@@ -169,13 +91,33 @@ let slit2 = slit(vertSpacer: 8)
 let slit3 = slit(vertSpacer: 12)
 let slit4 = slit(vertSpacer: 16)
 
+// Side
+var side = trapezoid(bottomWidth: Side.width, height: MainFace.height, taper: MainFace.taper)
+
+// Tray
+let trayBottom = middleCutout.maxY
+let blip = tan(MainFace.taper.radians)*trayBottom
+let trayDepth = blip.doubled+1
+let trayWidth = 23.5
+let trayBumpoutRatio = 0.98
+let bumpoutWidth = MiddleCutout.width*trayBumpoutRatio
+let bumpoutDepth = 2.0
+var trayBase = trapezoid(bottomWidth: trayWidth, height: trayDepth, taper: 0)
+var trayBumpout = trapezoid(bottomWidth: bumpoutWidth, height: bumpoutDepth, taper: 0)
+trayBumpout.translate(p(0, -bumpoutDepth))
+
+
 // Assembly
-var completedFace: [Shape] = [mainFace, bottomCutout, middleCutout, slit1, slit2, slit3, slit4]
+var completedFace = [mainFace, bottomCutout, middleCutout, slit1, slit2, slit3, slit4]
+
+// Move MainFace on sheet
+let verticalInset = 1.0
+let horizontalInset = 2.0
 
 // Sheet
 let sheetWidth = 48.0
 let sheetHeight = 96.0
-var sheet: Shape = Polygon(points: [
+var sheet = Polygon(points: [
     .origin,
     p(sheetWidth, 0),
     p(sheetWidth, sheetHeight),
@@ -183,7 +125,53 @@ var sheet: Shape = Polygon(points: [
 ])
 sheet.translate(p(-sheetWidth.half, 0))
 
-var everything = [sheet] + completedFace
+// Move side on sheet
+side.rotate(radians: -(90.0+MainFace.taper).radians, aroundPoint: side.corners[1])
+side.translate(p(sheet.minX-side.minX+horizontalInset, sheetHeight-horizontalInset))
+
+var side2 = side
+side2.rotate(radians: 180.0.radians, aroundPoint: side2.corners[0])
+
+let sideYDim = side.maxY-side.minY
+
+side2.translate(p(side.minX-side2.minX, -MainFace.bottomWidth))
+
+
+
+
+completedFace.mutate { shape in
+    shape.rotate(radians: MainFace.taper.radians, aroundPoint: mainFace.corners[1])
+    shape.translate(p(0, verticalInset))
+}
+
+let shiftToEdge = sheet.maxX-completedFace[0].maxX-horizontalInset
+completedFace.mutate { shape in
+        shape.translate(p(shiftToEdge,0))
+}
+
+// Add Back Plate
+var backPlate = mainFace
+backPlate.mirror(plane: LineSegment(start: p(0, MainFace.height.half), end: p(1, MainFace.height.half)))
+backPlate.rotate(radians: MainFace.taper.radians, aroundPoint: backPlate.corners[0])
+let shiftLeft = sheet.minX-backPlate.minX+horizontalInset
+backPlate.translate(p(shiftLeft, verticalInset))
+
+// Place on Sheet
+//var everything = [sheet as Shape]
+//everything += completedFace
+//everything += [backPlate as Shape]
+//everything += [side as Shape]
+//everything += [side2 as Shape]
+//everything += [trayBase as Shape]
+//everything += [trayBumpout as Shape]
+
+var everything: [Any] = completedFace + [sheet, backPlate, side, side2, trayBase, trayBumpout]
+//everything += completedFace
+//everything += [backPlate as Shape]
+//everything += [side as Shape]
+//everything += [side2 as Shape]
+//everything += [trayBase as Shape]
+//everything += [trayBumpout as Shape]
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -191,9 +179,11 @@ var everything = [sheet] + completedFace
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 let scaleFactor = 10.0
-let inset = 20.0
+let inset = 0.0
 
-everything.mutate { piece in
+var e2: [Translatable] = everything as! [Translatable]
+
+e2.mutate { piece in
     piece.scale(scaleFactor)
     piece.translate(p(MainFace.bottomWidth.half*scaleFactor+inset, inset))
 }
@@ -203,7 +193,24 @@ everything.mutate { piece in
 /// Export /////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ship(shapes: everything)
+ship(shapes: e2)
+
+
+
+
+
+//var sideAndFront = [side, mainFace]
+//
+//sideAndFront.mutate { piece in
+//    piece.scale(10)
+//    piece.translate(p(mainFace.maxX.doubled, 30))
+//}
+//
+//sideAndFront.mutate { piece in
+//    piece.translate(p(sideAndFront[1].maxX.doubled, 30))
+//}
+//
+//ship(shapes: sideAndFront)
 
 
 

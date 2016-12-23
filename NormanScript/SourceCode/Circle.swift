@@ -6,23 +6,30 @@ import Foundation
 
 
 struct Circle {
-    let diameter: Double
+    var diameter: Double
     var center: Point
 }
 
-extension Circle: Shape {
-    mutating internal func scale(_ factor: Double) {
-        
+extension Circle: Translatable {
+    mutating func scale(_ factor: Double) {
+        center.scale(factor)
+        diameter = diameter*factor
     }
 
-    mutating internal func translate(_ point: Point) {
+    mutating func translate(_ point: Point) {
         center.translate(point)
     }
     
-    mutating func mirror(plane: LineSegment) {}
+    mutating func mirror(plane: LineSegment) {
+        center.mirror(plane: plane)
+    }
     
-    mutating func rotate(radians: Double, aroundPoint point: Point){}
+    mutating func rotate(radians: Double, aroundPoint point: Point){
+        center.rotate(radians: radians, aroundPoint: point)
+    }
+}
 
+extension Circle: SVGExportable {
     //
     // <circle cx="125" cy="125" r="75" fill="orange" />
     //

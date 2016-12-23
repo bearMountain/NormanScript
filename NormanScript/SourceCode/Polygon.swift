@@ -12,7 +12,7 @@ struct Polygon {
     }
 }
 
-extension Polygon: Shape {
+extension Polygon: SVGExportable {
     //
     //   <polygon points="200,10 250,190 160,210" style="fill:lime;stroke:purple;stroke-width:1" />
     //
@@ -36,7 +36,7 @@ extension Polygon: Shape {
 
 
 
-extension Polygon {
+extension Polygon: Translatable {
     mutating func translate(_ point: Point) {
         for i in 0..<points.count {
             points[i].translate(point)
@@ -59,5 +59,23 @@ extension Polygon {
         points.mutate { point in
             point.scale(factor)
         }
+    }
+}
+
+extension Polygon: Locatable {
+    var maxY: Double {
+        return points.find(max) { $0.y }
+    }
+    
+    var minY: Double {
+        return points.find(min) { $0.y }
+    }
+    
+    var maxX: Double {
+        return points.find(max) { $0.x }
+    }
+    
+    var minX: Double {
+        return points.find(min) { $0.x }
     }
 }

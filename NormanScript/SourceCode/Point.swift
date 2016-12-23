@@ -4,26 +4,22 @@
 
 import Foundation
 
+
 //MARK: - Point
-struct Point {
+struct Point: PointProtocol {
     var x: Double
     var y: Double
 }
 
-func rotate(point: Point, aroundPoint: Point, delta: Double) -> Point {
-    let transformMatrix = m([
-        [cos(delta), sin(delta)],
-        [-sin(delta), cos(delta)]
-        ])
-    let pointToMove = m(point)
-    let axisPoint = m(aroundPoint)
-    
-    let resultMatrix = transformMatrix*(pointToMove-axisPoint) + axisPoint
-    
-    return p(resultMatrix)
+
+// Annoying, but necessary until Swift 3.1 is released
+protocol PointProtocol {
+    var x: Double { get set}
+    var y: Double { get set}
 }
 
-extension Point {
+
+extension Point: Translatable {
     mutating func translate(x: Double, y: Double) {
         self.x += x
         self.y += y
@@ -63,11 +59,14 @@ extension Point {
     }
 }
 
+
+// Convenience Class Var
 extension Point {
     static var origin: Point {
         return p(0,0)
     }
 }
+
 
 //MARK: - Convenience Constructors
 func p(_ x: Double,_ y: Double) -> Point {
@@ -76,4 +75,14 @@ func p(_ x: Double,_ y: Double) -> Point {
 
 func p(_ matrix: Matrix) -> Point {
     return Point(x: matrix[0,0], y: matrix[1,0])
+}
+
+
+// Min/Max finding extension
+extension Array where Element: PointProtocol {
+    func find(_ comparator: @escaping (Double, Double)->(Double), coordinateSelector:@escaping (Point)->(Double)) -> Double {
+        return self.reduce(coordinateSelector(self[0] as! Point)) { current, point in
+            return comparator(current, coordinateSelector(point as! Point))
+        }
+    }
 }

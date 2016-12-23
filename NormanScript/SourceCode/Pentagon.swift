@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct Pentagon: Shape {
+struct Pentagon {
     public var points: [Point] {
         return polygon.points
     }
@@ -27,12 +27,18 @@ struct Pentagon: Shape {
         polygon = Polygon(points: points)
     }
     
-    private var polygon: Polygon
-    
+    fileprivate var polygon: Polygon
+}
+
+
+extension Pentagon: SVGExportable {
     func generateSVG() -> String {
         return polygon.generateSVG()
     }
-    
+}
+
+
+extension Pentagon: Translatable {
     mutating func translate(_ point: Point) {
         polygon.translate(point)
         center.translate(point)
@@ -49,5 +55,26 @@ struct Pentagon: Shape {
     }
     
     mutating func scale(_ factor: Double) {
+        polygon.scale(factor)
+        center.scale(factor)
     }
 }
+
+extension Pentagon: Locatable {
+    var maxY: Double {
+        return polygon.maxY
+    }
+    
+    var minY: Double {
+        return polygon.minY
+    }
+    
+    var maxX: Double {
+        return polygon.maxX
+    }
+    
+    var minX: Double {
+        return polygon.minX
+    }
+}
+

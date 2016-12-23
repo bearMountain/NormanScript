@@ -56,17 +56,18 @@ extension String {
     }
 }
 
-extension Array where Element: Shape {
+extension Array where Element: SVGExportable {
     func ship() {
         self.map{$0.generateSVG()}.joined(separator: "\n").addSVGTags().export()
     }
 }
 
-func ship(shapes: [Shape]) {
-    shapes.map{$0.generateSVG()}.joined(separator: "\n").addSVGTags().export()
+func ship(shapes: [Any]) {
+    let s = shapes as! [SVGExportable]
+    s.map{$0.generateSVG()}.joined(separator: "\n").addSVGTags().export()
     print("Shipped sucka.")
 }
 
-func ship(_ shape: Shape) {
+func ship(_ shape: SVGExportable) {
     ship(shapes: [shape])
 }

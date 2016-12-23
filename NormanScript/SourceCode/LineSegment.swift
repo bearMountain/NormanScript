@@ -17,19 +17,8 @@ struct LineSegment {
     }
 }
 
-extension LineSegment: Shape {
-    mutating internal func scale(_ factor: Double) {
-        
-    }
 
-    mutating internal func mirror(plane: LineSegment) {
-        
-    }
-
-    mutating internal func translate(_ point: Point) {
-        
-    }
-
+extension LineSegment: SVGExportable {
     //
     // <line x1="50" y1="50" x2="200" y2="200" stroke="blue" stroke-width="4" />
     //
@@ -47,24 +36,44 @@ extension LineSegment: Shape {
         
         svgString.append("/>")
         
-
+        
         return svgString
     }
-    
-    var length: Double {
-        return dist(self)
+}
+
+
+extension LineSegment: Translatable {
+    mutating func scale(_ factor: Double) {
+        start.scale(factor)
+        end.scale(factor)
     }
-    
-    @discardableResult mutating func translate(x: Double, y: Double) -> LineSegment {
+
+    mutating func mirror(plane: LineSegment) {
+        start.mirror(plane: plane)
+        end.mirror(plane: plane)
+    }
+
+    mutating func translate(_ point: Point) {
+        start.translate(point)
+        end.translate(point)
+    }
+
+    mutating func translate(x: Double, y: Double) {
         start.translate(x: x, y: y)
         end.translate(x: x, y: y)
-        
-        return self
     }
     
     mutating func rotate(radians: Double, aroundPoint pivot: Point) {
         start.rotate(radians: radians, aroundPoint: pivot)
         end.rotate(radians: radians, aroundPoint: pivot)
+    }
+}
+
+
+// Convenience
+extension LineSegment {
+    var length: Double {
+        return dist(self)
     }
     
     mutating func reverse() {
@@ -75,6 +84,16 @@ extension LineSegment: Shape {
 }
 
 
+// Operator Overload
 func + (lhs: LineSegment, rhs: LineSegment) -> Line {
     return Line(segments: [lhs, rhs])
 }
+
+
+
+
+
+
+
+
+

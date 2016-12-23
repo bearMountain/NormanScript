@@ -24,7 +24,8 @@
 		1F39583F1DEF634C0051F044 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F39583E1DEF634C0051F044 /* Geometry.swift */; };
 		1F5C2BB71D9B012300BFA222 /* ExportFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C2BB61D9B012300BFA222 /* ExportFunctions.swift */; };
 		1F5C2BB91D9B02B200BFA222 /* MathFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C2BB81D9B02B200BFA222 /* MathFunctions.swift */; };
-		1FD863351E059FB500C12C3D /* Pentagon_Flower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD863341E059FB500C12C3D /* Pentagon_Flower.swift */; };
+		1F6351DA1E09ABE20019B93D /* Trapezoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6351D91E09ABE20019B93D /* Trapezoid.swift */; };
+		1F6351DD1E0A26AE0019B93D /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6351DC1E0A26AE0019B93D /* Utility.swift */; };
 		1FD863371E059FE900C12C3D /* Scratch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD863361E059FE900C12C3D /* Scratch.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,8 @@
 		1F39583E1DEF634C0051F044 /* Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Geometry.swift; path = SourceCode/Geometry.swift; sourceTree = "<group>"; };
 		1F5C2BB61D9B012300BFA222 /* ExportFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExportFunctions.swift; path = SourceCode/ExportFunctions.swift; sourceTree = "<group>"; };
 		1F5C2BB81D9B02B200BFA222 /* MathFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MathFunctions.swift; path = SourceCode/MathFunctions.swift; sourceTree = "<group>"; };
+		1F6351D91E09ABE20019B93D /* Trapezoid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Trapezoid.swift; path = SourceCode/Trapezoid.swift; sourceTree = "<group>"; };
+		1F6351DC1E0A26AE0019B93D /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utility.swift; path = SourceCode/Utility.swift; sourceTree = "<group>"; };
 		1FD863341E059FB500C12C3D /* Pentagon_Flower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Pentagon_Flower.swift; path = Designs/Pentagon_Flower.swift; sourceTree = "<group>"; };
 		1FD863361E059FE900C12C3D /* Scratch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Scratch.swift; path = SourceCode/Scratch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,6 +131,7 @@
 				1F11FD631D8E7597008D59A6 /* Circle.swift */,
 				1F3958361DEE6AB90051F044 /* Polygon.swift */,
 				1F39583B1DEE6F100051F044 /* Pentagon.swift */,
+				1F6351D91E09ABE20019B93D /* Trapezoid.swift */,
 			);
 			name = Primitives;
 			sourceTree = "<group>";
@@ -144,6 +148,7 @@
 				1F3958291DE7DCB50051F044 /* Matrix.swift */,
 				1F39583E1DEF634C0051F044 /* Geometry.swift */,
 				1FD863361E059FE900C12C3D /* Scratch.swift */,
+				1F6351DC1E0A26AE0019B93D /* Utility.swift */,
 			);
 			name = Framework;
 			sourceTree = "<group>";
@@ -255,12 +260,13 @@
 				1F11FD471D8DD958008D59A6 /* main.swift in Sources */,
 				1FD863371E059FE900C12C3D /* Scratch.swift in Sources */,
 				1F39583F1DEF634C0051F044 /* Geometry.swift in Sources */,
+				1F6351DD1E0A26AE0019B93D /* Utility.swift in Sources */,
 				1F11FD5D1D8E7434008D59A6 /* Shape.swift in Sources */,
 				1F39583A1DEE6D720051F044 /* Dragon_Curve.swift in Sources */,
+				1F6351DA1E09ABE20019B93D /* Trapezoid.swift in Sources */,
 				1F11FD5B1D8E73AA008D59A6 /* SwiftExtensions.swift in Sources */,
 				1F39582C1DE7E9580051F044 /* Point.swift in Sources */,
 				1F11FD621D8E7580008D59A6 /* LineSegment.swift in Sources */,
-				1FD863351E059FB500C12C3D /* Pentagon_Flower.swift in Sources */,
 				1F3958371DEE6AB90051F044 /* Polygon.swift in Sources */,
 				1F11FD641D8E7597008D59A6 /* Circle.swift in Sources */,
 				1F39583C1DEE6F100051F044 /* Pentagon.swift in Sources */,
