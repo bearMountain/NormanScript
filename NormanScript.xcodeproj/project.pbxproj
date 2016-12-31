@@ -19,6 +19,8 @@
 		1F39583F1DEF634C0051F044 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F39583E1DEF634C0051F044 /* Geometry.swift */; };
 		1F54879E1E16CACC00FD4D59 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FD631D8E7597008D59A6 /* Circle.swift */; };
 		1F5487A11E17982200FD4D59 /* SVGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5487A01E17982200FD4D59 /* SVGPath.swift */; };
+		1F5487A31E17A2B100FD4D59 /* Corner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5487A21E17A2B100FD4D59 /* Corner.swift */; };
+		1F5487A51E17A2E100FD4D59 /* Polypath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5487A41E17A2E100FD4D59 /* Polypath.swift */; };
 		1F5C2BB71D9B012300BFA222 /* ExportFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C2BB61D9B012300BFA222 /* ExportFunctions.swift */; };
 		1F5C2BB91D9B02B200BFA222 /* MathFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C2BB81D9B02B200BFA222 /* MathFunctions.swift */; };
 		1F6351DA1E09ABE20019B93D /* Trapezoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6351D91E09ABE20019B93D /* Trapezoid.swift */; };
@@ -57,6 +59,8 @@
 		1F39583B1DEE6F100051F044 /* Pentagon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Pentagon.swift; path = SourceCode/Pentagon.swift; sourceTree = "<group>"; };
 		1F39583E1DEF634C0051F044 /* Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Geometry.swift; path = SourceCode/Geometry.swift; sourceTree = "<group>"; };
 		1F5487A01E17982200FD4D59 /* SVGPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SVGPath.swift; path = SourceCode/SVGPath.swift; sourceTree = "<group>"; };
+		1F5487A21E17A2B100FD4D59 /* Corner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Corner.swift; path = SourceCode/Corner.swift; sourceTree = "<group>"; };
+		1F5487A41E17A2E100FD4D59 /* Polypath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Polypath.swift; path = SourceCode/Polypath.swift; sourceTree = "<group>"; };
 		1F5C2BB61D9B012300BFA222 /* ExportFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExportFunctions.swift; path = SourceCode/ExportFunctions.swift; sourceTree = "<group>"; };
 		1F5C2BB81D9B02B200BFA222 /* MathFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MathFunctions.swift; path = SourceCode/MathFunctions.swift; sourceTree = "<group>"; };
 		1F6351D91E09ABE20019B93D /* Trapezoid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Trapezoid.swift; path = SourceCode/Trapezoid.swift; sourceTree = "<group>"; };
@@ -131,6 +135,8 @@
 				1F3958361DEE6AB90051F044 /* Polygon.swift */,
 				1F39583B1DEE6F100051F044 /* Pentagon.swift */,
 				1F6351D91E09ABE20019B93D /* Trapezoid.swift */,
+				1F5487A21E17A2B100FD4D59 /* Corner.swift */,
+				1F5487A41E17A2E100FD4D59 /* Polypath.swift */,
 			);
 			name = Primitives;
 			sourceTree = "<group>";
@@ -264,6 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F5487A51E17A2E100FD4D59 /* Polypath.swift in Sources */,
 				1F6351DE1E0D918A0019B93D /* Polygon.swift in Sources */,
 				1F11FD5F1D8E74A9008D59A6 /* NormanTypes.swift in Sources */,
 				1F5C2BB91D9B02B200BFA222 /* MathFunctions.swift in Sources */,
@@ -274,6 +281,7 @@
 				1FD863371E059FE900C12C3D /* Scratch.swift in Sources */,
 				1F39583F1DEF634C0051F044 /* Geometry.swift in Sources */,
 				1F6351DD1E0A26AE0019B93D /* Utility.swift in Sources */,
+				1F5487A31E17A2B100FD4D59 /* Corner.swift in Sources */,
 				1F11FD5D1D8E7434008D59A6 /* Shape.swift in Sources */,
 				1F6351DA1E09ABE20019B93D /* Trapezoid.swift in Sources */,
 				1F11FD5B1D8E73AA008D59A6 /* SwiftExtensions.swift in Sources */,

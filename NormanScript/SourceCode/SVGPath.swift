@@ -7,7 +7,7 @@ import Foundation
 class SVGPath {
     //MARK: - Public Var
     var string: String {
-        return "<path d=\"\(pathString)\""
+        return "<path d=\"\(pathString)\" fill=\"none\" stroke=\"black\" stroke-width=\"1\" />"
     }
     
     //MARK: - Public Funcs
