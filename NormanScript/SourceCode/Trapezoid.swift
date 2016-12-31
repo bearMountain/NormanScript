@@ -4,14 +4,17 @@
 
 import Foundation
 
-struct Trapezoid {
+class Trapezoid: Shape {
+    init(corners: [Point], cornerRadius: Double = 0) {
+        self.corners = corners
+        self.cornerRadius = cornerRadius
+    }
+    
     var corners: [Point]
     var cornerRadius: Double = 0
-}
 
-
-extension Trapezoid: SVGExportable {
-    func generateSVG() -> String {
+    // SVG
+    override func generateSVG() -> String {
         // Helper Funcs
         func S(controlPoint: Point, endPoint: Point) -> String {
             return "S\(controlPoint.x),\(controlPoint.y) \(endPoint.x),\(endPoint.y)"
@@ -55,53 +58,79 @@ extension Trapezoid: SVGExportable {
         
         return pathStringStart + path + pathStringEnd
     }
-}
 
-
-extension Trapezoid: Translatable {
-    mutating func translate(_ point: Point) {
+    // Translating
+    override func translate(_ point: Point) {
         corners.mutate { corner in
             corner.translate(point)
         }
     }
     
-    mutating func rotate(radians: Double, aroundPoint point: Point) {
+    override func rotate(radians: Double, aroundPoint point: Point) {
         corners.mutate { corner in
             corner.rotate(radians: radians, aroundPoint: point)
         }
     }
     
-    mutating func mirror(plane: LineSegment) {
+    override func mirror(plane: Line) {
         corners.mutate { corner in
             corner.mirror(plane: plane)
         }
     }
     
-    mutating func scale(_ factor: Double) {
+    override func scale(_ factor: Double) {
         corners.mutate { corner in
             corner.scale(factor)
         }
+        cornerRadius *= factor
     }
-}
 
-
-extension Trapezoid: Locatable {
-    var maxY: Double {
+    // Locating
+    override var maxY: Double {
         return corners.find(max) { $0.y }
     }
     
-    var minY: Double {
+    override var minY: Double {
         return corners.find(min) { $0.y }
     }
     
-    var maxX: Double {
+    override var maxX: Double {
         return corners.find(max) { $0.x }
     }
     
-    var minX: Double {
+    override var minX: Double {
         return corners.find(min) { $0.x }
+    }
+    
+    // Copy
+    func copy() -> Trapezoid {
+        return Trapezoid(corners: corners.map{$0.copy()}, cornerRadius: cornerRadius)
     }
 }
 
+// Convenience Constructors
+func trapezoid(topWidth: Double, bottomWidth: Double, height: Double) -> Trapezoid {
+    let corners = [
+        p(-bottomWidth.half, height),
+        p(-topWidth.half, 0),
+        p(topWidth.half, 0),
+        p(bottomWidth.half, height)
+    ]
+    
+    return Trapezoid(corners: corners, cornerRadius: 0)
+}
+
+func trapezoid(bottomWidth: Double, height: Double, taper: Double) -> Trapezoid {
+    let cuttofWidth = tan(taper.radians)*height
+    
+    let corners = [
+        p(-bottomWidth.half, height),
+        p(-bottomWidth.half+cuttofWidth, 0),
+        p(bottomWidth.half-cuttofWidth, 0),
+        p(bottomWidth.half, height)
+    ]
+    
+    return Trapezoid(corners: corners, cornerRadius: 0)
+}
 
 

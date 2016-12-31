@@ -5,67 +5,93 @@
 import Foundation
 
 
-struct Line {
-    var segments: [LineSegment]
+class Line: Shape {
+    var start: Point
+    var end: Point
+    var displayProperties: DisplayProperties?
+    
+    init(start: Point, end: Point, strokeColor: Color? = .black, strokeWidth: Double? = 1, fillColor: Color? = nil) {
+        self.start = start
+        self.end = end
+        self.displayProperties = DisplayProperties(strokeColor: strokeColor, strokeWidth: strokeWidth, fillColor: fillColor)
+    }
+
+    //
+    // <line x1="50" y1="50" x2="200" y2="200" stroke="blue" stroke-width="4" />
+    //
+    override func generateSVG() -> String {
+        //        return "<line x1=\"\(self.start.x)\" y1=\"\(self.start.y)\" x2=\"\(self.end.x)\" y2=\"\(self.end.y)\" stroke=\"blue\" stroke-width=\"1\" />"
+        var svgString = "<line x1=\"\(self.start.x)\" y1=\"\(self.start.y)\" x2=\"\(self.end.x)\" y2=\"\(self.end.y)\" "
+        
+        if let strokeColor = displayProperties?.strokeColor {
+            svgString.append("stroke=\"\(strokeColor.generateSVG())\" ")
+        }
+        
+        if let strokeWidth = displayProperties?.strokeWidth {
+            svgString.append("stroke-width=\"\(strokeWidth)\" ")
+        }
+        
+        svgString.append("/>")
+        
+        
+        return svgString
+    }
+
+    override func scale(_ factor: Double) {
+        start.scale(factor)
+        end.scale(factor)
+    }
+
+    override func mirror(plane: Line) {
+        start.mirror(plane: plane)
+        end.mirror(plane: plane)
+    }
+
+    override func translate(_ point: Point) {
+        start.translate(point)
+        end.translate(point)
+    }
+
+    func translate(x: Double, y: Double) {
+        start.translate(x: x, y: y)
+        end.translate(x: x, y: y)
+    }
+    
+    override func rotate(radians: Double, aroundPoint pivot: Point) {
+        start.rotate(radians: radians, aroundPoint: pivot)
+        end.rotate(radians: radians, aroundPoint: pivot)
+    }
 }
 
 
 // Convenience
 extension Line {
-    var endpoint: Point {
-        if let last = segments.last {
-            return last.end
-        } else {
-            return p(0,0)
-        }
+    var length: Double {
+        return dist(self)
     }
     
-    mutating func reverse() {
-        segments.mutate { segment in
-            segment.reverse()
-        }
-        segments.reverse()
+    var slope: Double {
+        return getSlope(line: self)
+    }
+    
+    func reverse() {
+        let tmp = start
+        start = end
+        end = tmp
     }
 }
 
 
-
-extension Line: SVGExportable {
-    //
-    // <line x1="50" y1="50" x2="200" y2="200" stroke="blue" stroke-width="4" />
-    //
-    func generateSVG() -> String {
-        return segments.map{$0.generateSVG()}.joined(separator: "\n")
-    }
-}
+// Operator Overload
+//func + (lhs: Line, rhs: Line) -> Polyline {
+//    return Polyline(segments: [lhs, rhs])
+//}
 
 
-extension Line: Translatable {
-    mutating func translate(x: Double, y: Double) {
-        segments.mutate {
-            $0.translate(x: x, y: y)
-        }
-    }
-    
-    mutating func translate(_ point: Point) {
-        translate(x: point.x, y: point.y)
-    }
-    
-    mutating func rotate(radians: Double, aroundPoint pivot: Point) {
-        segments.mutate { segment in
-            segment.rotate(radians: radians, aroundPoint: pivot)
-        }
-    }
-    
-    mutating func scale(_ factor: Double) {
-        segments.mutate { segment in
-            segment.scale(factor)
-        }
-    }
-    
-    mutating func mirror(plane: LineSegment) {
-        segments.mutate { segment in
-            segment.mirror(plane: plane)
-        }
-    }
-}
+
+
+
+
+
+
+

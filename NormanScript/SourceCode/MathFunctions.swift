@@ -9,7 +9,7 @@ func dist(startPoint p_0: Point, endPoint p_1: Point) -> Double {
     return sqrt( (p_1.x-p_0.x).squared + (p_1.y-p_0.y).squared )
 }
 
-func dist(_ line: LineSegment) -> Double {
+func dist(_ line: Line) -> Double {
     return dist(startPoint: line.start, endPoint: line.end)
 }
 
@@ -29,3 +29,16 @@ func interpolatedPoint(startPoint p_0: Point, endPoint p_1: Point, distanceFromE
     let newDistance = totalDistance-d
     return interpolatedPoint(startPoint: p_0, endPoint: p_1, distance: newDistance)
 }
+
+func getSlope(line: Line) -> Double {
+    return getSlope(p1: line.start, p2: line.end)
+}
+
+func getSlope(p1: Point, p2: Point) -> Double {
+    return (p2.y-p1.y) / (p2.x-p1.x)
+}
+
+
+
+
+

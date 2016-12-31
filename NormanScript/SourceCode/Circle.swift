@@ -5,35 +5,37 @@
 import Foundation
 
 
-struct Circle {
+class Circle: Shape {
     var diameter: Double
     var center: Point
-}
+    
+    init(diameter: Double, center: Point) {
+        self.diameter = diameter
+        self.center = center
+    }
 
-extension Circle: Translatable {
-    mutating func scale(_ factor: Double) {
+    // Translation
+    override func scale(_ factor: Double) {
         center.scale(factor)
         diameter = diameter*factor
     }
 
-    mutating func translate(_ point: Point) {
+    override func translate(_ point: Point) {
         center.translate(point)
     }
     
-    mutating func mirror(plane: LineSegment) {
+    override func mirror(plane: Line) {
         center.mirror(plane: plane)
     }
     
-    mutating func rotate(radians: Double, aroundPoint point: Point){
+    override func rotate(radians: Double, aroundPoint point: Point){
         center.rotate(radians: radians, aroundPoint: point)
     }
-}
 
-extension Circle: SVGExportable {
     //
     // <circle cx="125" cy="125" r="75" fill="orange" />
     //
-    func generateSVG() -> String {
-        return "<circle cx=\"\(center.x)\" cy=\"\(center.y)\" r=\"\(diameter.half)\"/>"
+    override func generateSVG() -> String {
+        return "<circle cx=\"\(center.x)\" cy=\"\(center.y)\" r=\"\(diameter.half)\" stroke=\"rgb(0,0,0)\" stroke-width=\"0.5\" />"
     }
 }

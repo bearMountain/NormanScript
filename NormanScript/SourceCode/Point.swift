@@ -5,13 +5,6 @@
 import Foundation
 
 
-//MARK: - Point
-struct Point: PointProtocol {
-    var x: Double
-    var y: Double
-}
-
-
 // Annoying, but necessary until Swift 3.1 is released
 protocol PointProtocol {
     var x: Double { get set}
@@ -19,17 +12,33 @@ protocol PointProtocol {
 }
 
 
-extension Point: Translatable {
-    mutating func translate(x: Double, y: Double) {
+//MARK: - Point
+class Point: Shape, PointProtocol {
+    var x: Double
+    var y: Double
+    
+    init(x: Double, y: Double) {
+        self.x = x
+        self.y = y
+    }
+    
+    // SVG
+    override func generateSVG() -> String {
+        let circle = Circle(diameter: 10, center: p(x,y))
+        return circle.generateSVG()
+    }
+
+    // Translation
+    func translate(x: Double, y: Double) {
         self.x += x
         self.y += y
     }
     
-    mutating func translate(_ point: Point) {
+    override func translate(_ point: Point) {
         translate(x: point.x, y: point.y)
     }
     
-    mutating func rotate(radians: Double, aroundPoint pivot: Point) {
+    override func rotate(radians: Double, aroundPoint pivot: Point) {
         let transformMatrix = m([
             [cos(radians), sin(radians)],
             [-sin(radians), cos(radians)]
@@ -43,7 +52,7 @@ extension Point: Translatable {
         self.y = resultMatrix[1,0]
     }
     
-    mutating func mirror(plane: LineSegment) {
+    override func mirror(plane: Line) {
         let m = (plane.start.y-plane.end.y)/(plane.start.x-plane.end.x)
         let b = plane.start.y-m*plane.start.x
         
@@ -53,9 +62,13 @@ extension Point: Translatable {
         y = 2*d*m - y + 2*b
     }
     
-    mutating func scale(_ factor: Double) {
+    override func scale(_ factor: Double) {
         x = x*factor
         y = y*factor
+    }
+    
+    func copy() -> Point {
+        return Point(x: x, y: y)
     }
 }
 

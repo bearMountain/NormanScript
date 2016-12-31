@@ -5,22 +5,50 @@
 import Foundation
 
 
-protocol SVGExportable {
-    func generateSVG() -> String
-}
-
-protocol Translatable {
-    mutating func translate(_ point: Point)
-    mutating func mirror(plane: LineSegment)
-    mutating func rotate(radians: Double, aroundPoint point: Point)
-    mutating func scale(_ factor: Double)
-}
-
-protocol Locatable {
-    var maxY: Double { get }
-    var minY: Double { get }
-    var maxX: Double { get }
-    var minX: Double { get }
+class Shape {
+    // SVG Export
+    func generateSVG() -> String {
+        assertionFailure("Error: Method Unimplimented")
+        return ""
+    }
+    
+    // Location
+    var maxY: Double {
+        assertionFailure("Error: Get Variable Unimplimented")
+        return 0
+    }
+    
+    var minY: Double {
+        assertionFailure("Error: Get Variable Unimplimented")
+        return 0
+    }
+    
+    var maxX: Double {
+        assertionFailure("Error: Get Variable Unimplimented")
+        return 0
+    }
+    
+    var minX: Double {
+        assertionFailure("Error: Get Variable Unimplimented")
+        return 0
+    }
+    
+    // Translation
+    func translate(_ point: Point) {
+        assertionFailure("Error: Method Unimplimented")
+    }
+    
+    func mirror(plane: Line) {
+        assertionFailure("Error: Method Unimplimented")
+    }
+    
+    func rotate(radians: Double, aroundPoint point: Point) {
+        assertionFailure("Error: Method Unimplimented")
+    }
+    
+    func scale(_ factor: Double) {
+        assertionFailure("Error: Method Unimplimented")
+    }
 }
 
 

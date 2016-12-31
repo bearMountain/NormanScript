@@ -24,6 +24,12 @@ func c(_ r: Double, _ g: Double, _ b: Double) -> Color {
     return Color(r: r, g: g, b: b)
 }
 
+extension Color {
+    static var black: Color {
+        return c(0, 0, 0)
+    }
+}
+
 //MARK: - DisplayProperties
 struct DisplayProperties {
     var strokeColor: Color?

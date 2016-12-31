@@ -4,78 +4,84 @@
 
 import Foundation
 
-struct Polygon {
+class Polygon: Polyline {
+    override func svgBeginningString() -> String {
+        return "<polygon points=\""
+    }
+}
+
+class Polyline: Shape {
     var points: [Point]
     
     init(points: [Point]) {
         self.points = points
     }
-}
 
-extension Polygon: SVGExportable {
     //
     //   <polygon points="200,10 250,190 160,210" style="fill:lime;stroke:purple;stroke-width:1" />
     //
-    func generateSVG() -> String {
-        let beginning = "<polygon points=\""
+    override func generateSVG() -> String {
         var pointsString = ""
         
         for point in points {
             pointsString += "\(point.x),\(point.y) "
         }
         
-        let fullBeginning = beginning + pointsString + "\""
+        let fullBeginning = svgBeginningString() + pointsString + "\""
         
-        let style = "style=\"fill:white;stroke:black;stroke-width:1\""
+        let style = "style=\"fill:none;stroke:black;stroke-width:1\""
         
         let element = fullBeginning + " " + style + " />"
         
         return element
     }
-}
+    
+    func svgBeginningString() -> String {
+        return "<polyline points=\""
+    }
 
-
-
-extension Polygon: Translatable {
-    mutating func translate(_ point: Point) {
+    override func translate(_ point: Point) {
         for i in 0..<points.count {
             points[i].translate(point)
         }
     }
     
-    mutating func rotate(radians: Double, aroundPoint point: Point) {
+    override func rotate(radians: Double, aroundPoint point: Point) {
         for i in 0..<points.count {
             points[i].rotate(radians: radians, aroundPoint: point)
         }
     }
     
-    mutating func mirror(plane: LineSegment) {
+    override func mirror(plane: Line) {
         points.mutate { point in
             point.mirror(plane: plane)
         }
     }
     
-    mutating func scale(_ factor: Double) {
+    override func scale(_ factor: Double) {
         points.mutate { point in
             point.scale(factor)
         }
     }
-}
 
-extension Polygon: Locatable {
-    var maxY: Double {
+    override var maxY: Double {
         return points.find(max) { $0.y }
     }
     
-    var minY: Double {
+    override var minY: Double {
         return points.find(min) { $0.y }
     }
     
-    var maxX: Double {
+    override var maxX: Double {
         return points.find(max) { $0.x }
     }
     
-    var minX: Double {
+    override var minX: Double {
         return points.find(min) { $0.x }
+    }
+    
+    // Copy
+    func copy() -> Polyline {
+        return Polyline(points: points.map{$0.copy()})
     }
 }

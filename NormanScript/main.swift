@@ -6,212 +6,116 @@ import Foundation
 
 let ExportPath = "/Users/jeff/Desktop/test.svg"
 
-
-
-
-struct MainFace {
-    static let taper = 14.5
-    static let bottomWidth = 30.0
-    static let height = 42.625
+class Corner: Shape {
+    var point: Point
+    var radius: Double
+    
+    init(point: Point, radius: Double) {
+        self.point = point
+        self.radius = radius
+    }
 }
 
-struct BottomCutout {
-    static let width = 25.125
-    static let height = 8.6875
-    static let radius = 4.0
-    static let bottomSpacer = 1.0
+class Polypath: Shape {
+    var corners: [Corner] = []
+    
+    init(corners: [Corner]) {
+        self.corners = corners
+    }
+    
+    // SVG
+    override func generateSVG() -> String {
+        var path = SVGPath()
+
+        path.move(toPoint: corners.first!.point)
+        
+        for i in 1..<corners.count {
+            let currentCorner = corners[i]
+            if (currentCorner.radius == 0) {
+                path.addLine(toPoint: currentCorner.point)
+            } else {
+                let previousPoint = corners[i-1].point
+                let nextPoint = (i == corners.count-1) ? corners.first!.point : corners[i+1].point
+                
+                let (cStart, cEnd) = controlPoints(forStartPoint:previousPoint,
+                                                   vertex:currentCorner.point,
+                                                   endPoint:nextPoint,
+                                                   radius:currentCorner.radius)
+                
+                path.addLine(toPoint: cStart)
+                path.addCurve(controlPoint: currentCorner.point, endPoint: cEnd)
+                path.addLine(toPoint: nextPoint)
+            }
+        }
+        
+        path.close()
+
+        
+    }
 }
 
-struct MiddleCutout {
-    static let width = 19.625
-    static let height = 11.5625
-    static let bottomSpacer = 2.0
+extension Polypath {
+    func controlPoints(forStartPoint startPoint:Point, vertex:Point, endPoint:Point, radius:Double) -> (Point, Point) {
+        let v1 = p(startPoint.x-vertex.x, startPoint.y-vertex.y)
+        let v2 = p(endPoint.x-vertex.x, endPoint.y-vertex.y)
+        
+        let top = v1.x*v2.x + v1.y*v2.y
+        let bottom = dist(startPoint: startPoint, endPoint: vertex) * dist(startPoint: endPoint, endPoint: vertex)
+        
+        let angle = acos(top/bottom)
+        let h = abs( radius / tan(angle.half) )
+        
+        let p1 = interpolatedPoint(startPoint: vertex, endPoint: startPoint, distance: h)
+        let p2 = interpolatedPoint(startPoint: vertex, endPoint: endPoint, distance: h)
+        
+        return (p1, p2)
+    }
 }
 
-struct Side {
-    static let width = MainFace.bottomWidth * 0.8
-}
-
-
-func trapezoid(topWidth: Double, bottomWidth: Double, height: Double) -> Trapezoid {
+func buildingPolyTest() {
     let corners = [
-        p(-bottomWidth.half, height),
-        p(-topWidth.half, 0),
-        p(topWidth.half, 0),
-        p(bottomWidth.half, height)
-    ]
+        Corner(point: .origin, radius: 0),
+        Corner(point: p(0,2), radius: 0),
+        Corner(point: p(1,2), radius: 0),
+        Corner(point: p(1,1), radius: 0.5),
+        Corner(point: p(2,1), radius: 0.5),
+        Corner(point: p(2,2), radius: 0),
+        Corner(point: p(3,2), radius: 0),
+        Corner(point: p(3,0), radius: 0)
+        ]
     
-    return Trapezoid(corners: corners, cornerRadius: 0)
-}
-
-func trapezoid(bottomWidth: Double, height: Double, taper: Double) -> Trapezoid {
-    let cuttofWidth = tan(taper.radians)*height
+    var polypath = Polypath(corners: corners)
     
-    let corners = [
-        p(-bottomWidth.half, height),
-        p(-bottomWidth.half+cuttofWidth, 0),
-        p(bottomWidth.half-cuttofWidth, 0),
-        p(bottomWidth.half, height)
-    ]
+    ship(polypath)
+}
+
+func angleTest() {
+    let radius = 1.0
+    let line = Polyline(points: [p(0,2), .origin, p(2,0)])
     
-    return Trapezoid(corners: corners, cornerRadius: 0)
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Construction ///////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Main
-var mainFace = trapezoid(bottomWidth: MainFace.bottomWidth, height: MainFace.height, taper: MainFace.taper)
-
-// Bottom Cutout
-var bottomCutout = trapezoid(bottomWidth: BottomCutout.width, height: BottomCutout.height, taper: MainFace.taper)
-bottomCutout.cornerRadius = BottomCutout.radius
-bottomCutout.translate(p(0, MainFace.height-BottomCutout.height-BottomCutout.bottomSpacer))
-
-// Middle Cutout
-var middleCutout = trapezoid(bottomWidth: MiddleCutout.width, height: MiddleCutout.height, taper: MainFace.taper)
-middleCutout.cornerRadius = BottomCutout.radius
-middleCutout.translate(p(0, bottomCutout.minY-MiddleCutout.height-MiddleCutout.bottomSpacer))
-
-// Slits
-func slit(vertSpacer: Double) -> Trapezoid {
-    let slitHeight = 1.0
-    let newEdgePoint = interpolatedPoint(startPoint: middleCutout.corners[0], endPoint: middleCutout.corners[1], distanceFromEndpoint: -vertSpacer)
-    let slitWidth = newEdgePoint.x*(-2.0)
-    var slit = trapezoid(bottomWidth: slitWidth, height: slitHeight, taper: MainFace.taper)
-    slit.cornerRadius = BottomCutout.radius
-    slit.translate(p(0, newEdgePoint.y-slitHeight))
+    let v1 = p(line.points[0].x-line.points[1].x, line.points[0].y-line.points[1].y)
+    let v2 = p(line.points[2].x-line.points[1].x, line.points[2].y-line.points[1].y)
     
-    return slit
+    let top = v1.x*v2.x + v1.y*v2.y
+    let bottom = dist(startPoint: line.points[0], endPoint: line.points[1]) *
+                 dist(startPoint: line.points[2], endPoint: line.points[1])
+    
+    let angle = acos(top/bottom)
+    let h = abs( radius / tan(angle.half) )
+    
+    let p1 = interpolatedPoint(startPoint: line.points[1], endPoint: line.points[0], distance: h)
+    let p2 = interpolatedPoint(startPoint: line.points[1], endPoint: line.points[2], distance: h)
+    
+    var lines = [line, p1, p2]
+    lines.mutate { line in
+        line.scale(100)
+        line.translate(p(300,300))
+    }
+    
+    ship(lines)
 }
 
-let slit1 = slit(vertSpacer: 4)
-let slit2 = slit(vertSpacer: 8)
-let slit3 = slit(vertSpacer: 12)
-let slit4 = slit(vertSpacer: 16)
-
-// Side
-var side = trapezoid(bottomWidth: Side.width, height: MainFace.height, taper: MainFace.taper)
-
-// Tray
-let trayBottom = middleCutout.maxY
-let blip = tan(MainFace.taper.radians)*trayBottom
-let trayDepth = blip.doubled+1
-let trayWidth = 23.5
-let trayBumpoutRatio = 0.98
-let bumpoutWidth = MiddleCutout.width*trayBumpoutRatio
-let bumpoutDepth = 2.0
-var trayBase = trapezoid(bottomWidth: trayWidth, height: trayDepth, taper: 0)
-var trayBumpout = trapezoid(bottomWidth: bumpoutWidth, height: bumpoutDepth, taper: 0)
-trayBumpout.translate(p(0, -bumpoutDepth))
-
-
-// Assembly
-var completedFace = [mainFace, bottomCutout, middleCutout, slit1, slit2, slit3, slit4]
-
-// Move MainFace on sheet
-let verticalInset = 1.0
-let horizontalInset = 2.0
-
-// Sheet
-let sheetWidth = 48.0
-let sheetHeight = 96.0
-var sheet = Polygon(points: [
-    .origin,
-    p(sheetWidth, 0),
-    p(sheetWidth, sheetHeight),
-    p(0, sheetHeight)
-])
-sheet.translate(p(-sheetWidth.half, 0))
-
-// Move side on sheet
-side.rotate(radians: -(90.0+MainFace.taper).radians, aroundPoint: side.corners[1])
-side.translate(p(sheet.minX-side.minX+horizontalInset, sheetHeight-horizontalInset))
-
-var side2 = side
-side2.rotate(radians: 180.0.radians, aroundPoint: side2.corners[0])
-
-let sideYDim = side.maxY-side.minY
-
-side2.translate(p(side.minX-side2.minX, -MainFace.bottomWidth))
-
-
-
-
-completedFace.mutate { shape in
-    shape.rotate(radians: MainFace.taper.radians, aroundPoint: mainFace.corners[1])
-    shape.translate(p(0, verticalInset))
-}
-
-let shiftToEdge = sheet.maxX-completedFace[0].maxX-horizontalInset
-completedFace.mutate { shape in
-        shape.translate(p(shiftToEdge,0))
-}
-
-// Add Back Plate
-var backPlate = mainFace
-backPlate.mirror(plane: LineSegment(start: p(0, MainFace.height.half), end: p(1, MainFace.height.half)))
-backPlate.rotate(radians: MainFace.taper.radians, aroundPoint: backPlate.corners[0])
-let shiftLeft = sheet.minX-backPlate.minX+horizontalInset
-backPlate.translate(p(shiftLeft, verticalInset))
-
-// Place on Sheet
-//var everything = [sheet as Shape]
-//everything += completedFace
-//everything += [backPlate as Shape]
-//everything += [side as Shape]
-//everything += [side2 as Shape]
-//everything += [trayBase as Shape]
-//everything += [trayBumpout as Shape]
-
-var everything: [Any] = completedFace + [sheet, backPlate, side, side2, trayBase, trayBumpout]
-//everything += completedFace
-//everything += [backPlate as Shape]
-//everything += [side as Shape]
-//everything += [side2 as Shape]
-//everything += [trayBase as Shape]
-//everything += [trayBumpout as Shape]
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Display Helpers ////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-let scaleFactor = 10.0
-let inset = 0.0
-
-var e2: [Translatable] = everything as! [Translatable]
-
-e2.mutate { piece in
-    piece.scale(scaleFactor)
-    piece.translate(p(MainFace.bottomWidth.half*scaleFactor+inset, inset))
-}
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// Export /////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-ship(shapes: e2)
-
-
-
-
-
-//var sideAndFront = [side, mainFace]
-//
-//sideAndFront.mutate { piece in
-//    piece.scale(10)
-//    piece.translate(p(mainFace.maxX.doubled, 30))
-//}
-//
-//sideAndFront.mutate { piece in
-//    piece.translate(p(sideAndFront[1].maxX.doubled, 30))
-//}
-//
-//ship(shapes: sideAndFront)
-
+angleTest()
 
 
 
