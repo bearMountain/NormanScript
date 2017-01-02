@@ -9,6 +9,14 @@ extension Double {
         return self/2.0
     }
     
+    var third: Double {
+        return self/3.0
+    }
+    
+    var forth: Double {
+        return self/4.0
+    }
+    
     var doubled: Double {
         return self*2.0
     }

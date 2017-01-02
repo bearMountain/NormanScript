@@ -26,6 +26,7 @@
 		1F6351DA1E09ABE20019B93D /* Trapezoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6351D91E09ABE20019B93D /* Trapezoid.swift */; };
 		1F6351DD1E0A26AE0019B93D /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6351DC1E0A26AE0019B93D /* Utility.swift */; };
 		1F6351DE1E0D918A0019B93D /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3958361DEE6AB90051F044 /* Polygon.swift */; };
+		1FBE330C1E1A180E0078CFC1 /* Tiny_Piano.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6351E11E1575CF0019B93D /* Tiny_Piano.swift */; };
 		1FD863371E059FE900C12C3D /* Scratch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD863361E059FE900C12C3D /* Scratch.swift */; };
 /* End PBXBuildFile section */
 
@@ -275,6 +276,7 @@
 				1F11FD5F1D8E74A9008D59A6 /* NormanTypes.swift in Sources */,
 				1F5C2BB91D9B02B200BFA222 /* MathFunctions.swift in Sources */,
 				1F39582A1DE7DCB50051F044 /* Matrix.swift in Sources */,
+				1FBE330C1E1A180E0078CFC1 /* Tiny_Piano.swift in Sources */,
 				1F11FD471D8DD958008D59A6 /* main.swift in Sources */,
 				1F5487A11E17982200FD4D59 /* SVGPath.swift in Sources */,
 				1F54879E1E16CACC00FD4D59 /* Circle.swift in Sources */,

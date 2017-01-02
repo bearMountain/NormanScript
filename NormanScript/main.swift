@@ -53,7 +53,7 @@ func angleTest() {
     ship(lines)
 }
 
-buildingPolyTest()
+makeComb()
 
 
 

@@ -13,4 +13,14 @@ class Corner: Shape {
         self.point = point
         self.radius = radius
     }
+    
+    // Translation
+    override func translate(_ p: Point) {
+        point.translate(p)
+    }
+    
+    override func scale(_ factor: Double) {
+        point.scale(factor)
+        radius *= factor
+    }
 }
