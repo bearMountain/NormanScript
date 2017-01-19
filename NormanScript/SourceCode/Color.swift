@@ -4,7 +4,7 @@
 
 import Foundation
 
-//MARK: - Color
+
 struct Color {
     var r: Double
     var g: Double
@@ -28,13 +28,14 @@ extension Color {
     static var black: Color {
         return c(0, 0, 0)
     }
-}
-
-//MARK: - DisplayProperties
-struct DisplayProperties {
-    var strokeColor: Color?
-    var strokeWidth: Double?
-    var fillColor: Color?
+    
+    static var white: Color {
+        return c(1, 1, 1)
+    }
+    
+    static var gray: Color {
+        return c(0.5, 0.5, 0.5)
+    }
 }
 
 
