@@ -22,7 +22,7 @@ class Point: Shape, PointProtocol {
         self.y = y
     }
     
-    // SVG
+    // SVG Generations
     override func generateSVG() -> String {
         let circle = Circle(diameter: 10, center: p(x,y))
         return circle.generateSVG()
@@ -67,7 +67,8 @@ class Point: Shape, PointProtocol {
         y = y*factor
     }
     
-    func copy() -> Point {
+    // Copy
+    override func copy() -> Point {
         return Point(x: x, y: y)
     }
 }

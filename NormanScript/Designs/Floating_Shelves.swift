@@ -13,7 +13,7 @@ func makeShelfBracket1() {
     let boltSlopRatio = 1.35
     let boltInset = centerHeight/6.0
     
-    let path = Polypath(corners: [
+    let path = RoundedPolygon(corners: [
         Corner(point: .origin),
         Corner(point: p(topWidth, 0)),
         Corner(point: p(topWidth, sideHeight)),
@@ -44,7 +44,7 @@ func makeShelfBracket2() {
     let verticalBoltInset = 0.65
     let boltHorizontalDistance = 13.0
     
-    let path = Polypath(corners: [
+    let path = RoundedPolygon(corners: [
         Corner(point: .origin),
         Corner(point: p(topWidth, 0)),
         Corner(point: p(topWidth, sideHeight)),

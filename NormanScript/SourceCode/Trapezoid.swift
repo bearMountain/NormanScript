@@ -13,7 +13,7 @@ class Trapezoid: Shape {
     var corners: [Point]
     var cornerRadius: Double = 0
 
-    // SVG
+    // SVG Generation
     override func generateSVG() -> String {
         // Helper Funcs
         func S(controlPoint: Point, endPoint: Point) -> String {
@@ -59,29 +59,21 @@ class Trapezoid: Shape {
         return pathStringStart + path + pathStringEnd
     }
 
-    // Translating
+    // Translation
     override func translate(_ point: Point) {
-        corners.mutate { corner in
-            corner.translate(point)
-        }
+        corners.mutate { $0.translate(point) }
     }
     
     override func rotate(radians: Double, aroundPoint point: Point) {
-        corners.mutate { corner in
-            corner.rotate(radians: radians, aroundPoint: point)
-        }
+        corners.mutate { $0.rotate(radians: radians, aroundPoint: point) }
     }
     
     override func mirror(plane: Line) {
-        corners.mutate { corner in
-            corner.mirror(plane: plane)
-        }
+        corners.mutate { $0.mirror(plane: plane) }
     }
     
     override func scale(_ factor: Double) {
-        corners.mutate { corner in
-            corner.scale(factor)
-        }
+        corners.mutate { $0.scale(factor) }
         cornerRadius *= factor
     }
 
@@ -103,7 +95,7 @@ class Trapezoid: Shape {
     }
     
     // Copy
-    func copy() -> Trapezoid {
+    override func copy() -> Trapezoid {
         return Trapezoid(corners: corners.map{$0.copy()}, cornerRadius: cornerRadius)
     }
 }

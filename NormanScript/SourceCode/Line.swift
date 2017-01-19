@@ -16,11 +16,9 @@ class Line: Shape {
         self.displayProperties = DisplayProperties(strokeColor: strokeColor, strokeWidth: strokeWidth, fillColor: fillColor)
     }
 
-    //
-    // <line x1="50" y1="50" x2="200" y2="200" stroke="blue" stroke-width="4" />
-    //
+    // SVG Generations
     override func generateSVG() -> String {
-        //        return "<line x1=\"\(self.start.x)\" y1=\"\(self.start.y)\" x2=\"\(self.end.x)\" y2=\"\(self.end.y)\" stroke=\"blue\" stroke-width=\"1\" />"
+        // <line x1="50" y1="50" x2="200" y2="200" stroke="blue" stroke-width="4" />
         var svgString = "<line x1=\"\(self.start.x)\" y1=\"\(self.start.y)\" x2=\"\(self.end.x)\" y2=\"\(self.end.y)\" "
         
         if let strokeColor = displayProperties?.strokeColor {
@@ -37,6 +35,7 @@ class Line: Shape {
         return svgString
     }
 
+    // Translation
     override func scale(_ factor: Double) {
         start.scale(factor)
         end.scale(factor)
@@ -60,6 +59,23 @@ class Line: Shape {
     override func rotate(radians: Double, aroundPoint pivot: Point) {
         start.rotate(radians: radians, aroundPoint: pivot)
         end.rotate(radians: radians, aroundPoint: pivot)
+    }
+    
+    // Location
+    override var maxX: Double {
+        return [start, end].find(max) { $0.x }
+    }
+    
+    override var minX: Double {
+        return [start, end].find(min) { $0.x }
+    }
+    
+    override var maxY: Double {
+        return [start, end].find(max) { $0.y }
+    }
+    
+    override var minY: Double {
+        return [start, end].find(min) { $0.y }
     }
 }
 

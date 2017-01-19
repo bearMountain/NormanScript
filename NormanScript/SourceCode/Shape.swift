@@ -6,13 +6,23 @@ import Foundation
 
 
 class Shape {
-    // SVG Export
+    // SVG Generation
     func generateSVG() -> String {
         assertionFailure("Error: Method Unimplimented")
         return ""
     }
     
     // Location
+    var maxX: Double {
+        assertionFailure("Error: Get Variable Unimplimented")
+        return 0
+    }
+    
+    var minX: Double {
+        assertionFailure("Error: Get Variable Unimplimented")
+        return 0
+    }
+    
     var maxY: Double {
         assertionFailure("Error: Get Variable Unimplimented")
         return 0
@@ -22,15 +32,18 @@ class Shape {
         assertionFailure("Error: Get Variable Unimplimented")
         return 0
     }
-    
-    var maxX: Double {
-        assertionFailure("Error: Get Variable Unimplimented")
-        return 0
+
+    var center: Point {
+        return p(maxX-width.half, maxY-height.half)
     }
     
-    var minX: Double {
-        assertionFailure("Error: Get Variable Unimplimented")
-        return 0
+    // Dimensions
+    var width: Double {
+        return maxX-minX
+    }
+    
+    var height: Double {
+        return maxY-minY
     }
     
     // Translation
@@ -42,12 +55,23 @@ class Shape {
         assertionFailure("Error: Method Unimplimented")
     }
     
-    func rotate(radians: Double, aroundPoint point: Point) {
+    func rotate(radians: Double, aroundPoint point: Point = .origin) {
         assertionFailure("Error: Method Unimplimented")
     }
     
     func scale(_ factor: Double) {
         assertionFailure("Error: Method Unimplimented")
+    }
+    
+    // Copy
+    func copy() -> Shape {
+        assertionFailure("Error: Method Unimplimented")
+        return Shape()
+    }
+    
+    // Convenience
+    final func rotate(degrees: Double, aroundPoint point: Point = .origin) {
+        rotate(radians: degrees.radians, aroundPoint: point)
     }
 }
 

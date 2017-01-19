@@ -104,7 +104,7 @@ func makeComb() {
     corners.append(bottomLeft)
     
     
-    let comb = Polypath(corners: corners)
+    let comb = RoundedPolygon(corners: corners)
     
     let HoleDiameter = 0.25
     let SmallHoleSpacing = 0.984

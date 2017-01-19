@@ -5,14 +5,14 @@
 import Foundation
 
 
-class Polypath: Shape {
+class RoundedPolygon: Shape {
     var corners: [Corner] = []
     
     init(corners: [Corner] = []) {
         self.corners = corners
     }
     
-    // SVG
+    // SVG Generation
     override func generateSVG() -> String {
         let path = SVGPath()
         
@@ -50,6 +50,14 @@ class Polypath: Shape {
         corners.mutate { $0.translate(point) }
     }
     
+    override func mirror(plane: Line) {
+        corners.mutate { $0.mirror(plane: plane) }
+    }
+    
+    override func rotate(radians: Double, aroundPoint point: Point = .origin) {
+        corners.mutate { $0.rotate(radians: radians, aroundPoint: point) }
+    }
+    
     override func scale(_ factor: Double) {
         corners.mutate { $0.scale(factor) }
     }
@@ -71,17 +79,13 @@ class Polypath: Shape {
         return corners.find(min) { $0.x }
     }
     
-    // Dimensions
-    var width: Double {
-        return maxX-minX
-    }
-    
-    var height: Double {
-        return maxY-minY
+    // Copy
+    override func copy() -> RoundedPolygon {
+        return RoundedPolygon(corners: corners.map{$0.copy()})
     }
 }
 
-extension Polypath {
+extension RoundedPolygon {
     func curvePoints(forStartPoint startPoint:Point, vertex:Point, endPoint:Point, radius:Double) -> (Point, Point) {
         let v1 = p(startPoint.x-vertex.x, startPoint.y-vertex.y)
         let v2 = p(endPoint.x-vertex.x, endPoint.y-vertex.y)

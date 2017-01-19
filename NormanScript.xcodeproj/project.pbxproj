@@ -15,6 +15,7 @@
 		1F11FD5F1D8E74A9008D59A6 /* NormanTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FD5E1D8E74A9008D59A6 /* NormanTypes.swift */; };
 		1F11FD621D8E7580008D59A6 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FD611D8E7580008D59A6 /* Line.swift */; };
 		1F1D10B91E312DDD00C3C0DD /* Floating_Shelves.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1D10B81E312DDD00C3C0DD /* Floating_Shelves.swift */; };
+		1F1D10BB1E31635400C3C0DD /* Polyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1D10BA1E31635400C3C0DD /* Polyline.swift */; };
 		1F39582A1DE7DCB50051F044 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3958291DE7DCB50051F044 /* Matrix.swift */; };
 		1F39582C1DE7E9580051F044 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F39582B1DE7E9580051F044 /* Point.swift */; };
 		1F39583F1DEF634C0051F044 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F39583E1DEF634C0051F044 /* Geometry.swift */; };
@@ -23,7 +24,7 @@
 		1F54879E1E16CACC00FD4D59 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F11FD631D8E7597008D59A6 /* Circle.swift */; };
 		1F5487A11E17982200FD4D59 /* SVGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5487A01E17982200FD4D59 /* SVGPath.swift */; };
 		1F5487A31E17A2B100FD4D59 /* Corner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5487A21E17A2B100FD4D59 /* Corner.swift */; };
-		1F5487A51E17A2E100FD4D59 /* Polypath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5487A41E17A2E100FD4D59 /* Polypath.swift */; };
+		1F5487A51E17A2E100FD4D59 /* RoundedPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5487A41E17A2E100FD4D59 /* RoundedPolygon.swift */; };
 		1F5C2BB71D9B012300BFA222 /* ExportFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C2BB61D9B012300BFA222 /* ExportFunctions.swift */; };
 		1F5C2BB91D9B02B200BFA222 /* MathFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C2BB81D9B02B200BFA222 /* MathFunctions.swift */; };
 		1F6351DA1E09ABE20019B93D /* Trapezoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6351D91E09ABE20019B93D /* Trapezoid.swift */; };
@@ -57,17 +58,18 @@
 		1F11FD611D8E7580008D59A6 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Line.swift; path = SourceCode/Line.swift; sourceTree = "<group>"; };
 		1F11FD631D8E7597008D59A6 /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Circle.swift; path = SourceCode/Circle.swift; sourceTree = "<group>"; };
 		1F1D10B81E312DDD00C3C0DD /* Floating_Shelves.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Floating_Shelves.swift; path = Designs/Floating_Shelves.swift; sourceTree = "<group>"; };
+		1F1D10BA1E31635400C3C0DD /* Polyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Polyline.swift; path = SourceCode/Polyline.swift; sourceTree = "<group>"; };
 		1F3958291DE7DCB50051F044 /* Matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Matrix.swift; path = SourceCode/Matrix.swift; sourceTree = "<group>"; };
 		1F39582B1DE7E9580051F044 /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Point.swift; path = SourceCode/Point.swift; sourceTree = "<group>"; };
 		1F3958361DEE6AB90051F044 /* Polygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Polygon.swift; path = SourceCode/Polygon.swift; sourceTree = "<group>"; };
 		1F3958391DEE6D720051F044 /* Dragon_Curve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dragon_Curve.swift; path = Designs/Dragon_Curve.swift; sourceTree = "<group>"; };
-		1F39583B1DEE6F100051F044 /* Pentagon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Pentagon.swift; path = SourceCode/Pentagon.swift; sourceTree = "<group>"; };
+		1F39583B1DEE6F100051F044 /* _Pentagon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = _Pentagon.swift; path = SourceCode/_Pentagon.swift; sourceTree = "<group>"; };
 		1F39583E1DEF634C0051F044 /* Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Geometry.swift; path = SourceCode/Geometry.swift; sourceTree = "<group>"; };
 		1F43A7371E27EEB600B7CA9D /* Rectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Rectangle.swift; path = SourceCode/Rectangle.swift; sourceTree = "<group>"; };
 		1F43A7391E27EED600B7CA9D /* Paperweight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Paperweight.swift; path = Designs/Paperweight.swift; sourceTree = "<group>"; };
 		1F5487A01E17982200FD4D59 /* SVGPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SVGPath.swift; path = SourceCode/SVGPath.swift; sourceTree = "<group>"; };
 		1F5487A21E17A2B100FD4D59 /* Corner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Corner.swift; path = SourceCode/Corner.swift; sourceTree = "<group>"; };
-		1F5487A41E17A2E100FD4D59 /* Polypath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Polypath.swift; path = SourceCode/Polypath.swift; sourceTree = "<group>"; };
+		1F5487A41E17A2E100FD4D59 /* RoundedPolygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundedPolygon.swift; path = SourceCode/RoundedPolygon.swift; sourceTree = "<group>"; };
 		1F5C2BB61D9B012300BFA222 /* ExportFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExportFunctions.swift; path = SourceCode/ExportFunctions.swift; sourceTree = "<group>"; };
 		1F5C2BB81D9B02B200BFA222 /* MathFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MathFunctions.swift; path = SourceCode/MathFunctions.swift; sourceTree = "<group>"; };
 		1F6351D91E09ABE20019B93D /* Trapezoid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Trapezoid.swift; path = SourceCode/Trapezoid.swift; sourceTree = "<group>"; };
@@ -137,14 +139,15 @@
 			isa = PBXGroup;
 			children = (
 				1F39582B1DE7E9580051F044 /* Point.swift */,
+				1F5487A21E17A2B100FD4D59 /* Corner.swift */,
 				1F11FD611D8E7580008D59A6 /* Line.swift */,
 				1F11FD631D8E7597008D59A6 /* Circle.swift */,
 				1F3958361DEE6AB90051F044 /* Polygon.swift */,
-				1F39583B1DEE6F100051F044 /* Pentagon.swift */,
+				1F39583B1DEE6F100051F044 /* _Pentagon.swift */,
 				1F6351D91E09ABE20019B93D /* Trapezoid.swift */,
-				1F5487A21E17A2B100FD4D59 /* Corner.swift */,
-				1F5487A41E17A2E100FD4D59 /* Polypath.swift */,
+				1F5487A41E17A2E100FD4D59 /* RoundedPolygon.swift */,
 				1F43A7371E27EEB600B7CA9D /* Rectangle.swift */,
+				1F1D10BA1E31635400C3C0DD /* Polyline.swift */,
 			);
 			name = Primitives;
 			sourceTree = "<group>";
@@ -280,7 +283,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F5487A51E17A2E100FD4D59 /* Polypath.swift in Sources */,
+				1F1D10BB1E31635400C3C0DD /* Polyline.swift in Sources */,
+				1F5487A51E17A2E100FD4D59 /* RoundedPolygon.swift in Sources */,
 				1F6351DE1E0D918A0019B93D /* Polygon.swift in Sources */,
 				1F11FD5F1D8E74A9008D59A6 /* NormanTypes.swift in Sources */,
 				1F5C2BB91D9B02B200BFA222 /* MathFunctions.swift in Sources */,

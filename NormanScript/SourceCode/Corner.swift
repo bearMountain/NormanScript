@@ -24,9 +24,39 @@ class Corner: Shape, CornerProtocol {
         point.translate(p)
     }
     
+    override func mirror(plane: Line) {
+        point.mirror(plane: plane)
+    }
+    
+    override func rotate(radians: Double, aroundPoint point: Point) {
+        point.rotate(radians: radians, aroundPoint: point)
+    }
+    
     override func scale(_ factor: Double) {
         point.scale(factor)
         radius *= factor
+    }
+    
+    // Location
+    override var maxX: Double {
+        return point.x
+    }
+    
+    override var minX: Double {
+        return point.x
+    }
+    
+    override var maxY: Double {
+        return point.y
+    }
+    
+    override var minY: Double {
+        return point.y
+    }
+    
+    // Copy
+    override func copy() -> Corner {
+        return Corner(point: point.copy(), radius: radius)
     }
 }
 
