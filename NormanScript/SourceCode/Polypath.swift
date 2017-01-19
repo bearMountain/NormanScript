@@ -53,6 +53,32 @@ class Polypath: Shape {
     override func scale(_ factor: Double) {
         corners.mutate { $0.scale(factor) }
     }
+    
+    // Location
+    override var maxY: Double {
+        return corners.find(max) { $0.y }
+    }
+    
+    override var minY: Double {
+        return corners.find(min) { $0.y }
+    }
+    
+    override var maxX: Double {
+        return corners.find(max) { $0.x }
+    }
+    
+    override var minX: Double {
+        return corners.find(min) { $0.x }
+    }
+    
+    // Dimensions
+    var width: Double {
+        return maxX-minX
+    }
+    
+    var height: Double {
+        return maxY-minY
+    }
 }
 
 extension Polypath {

@@ -36,6 +36,6 @@ class Circle: Shape {
     // <circle cx="125" cy="125" r="75" fill="orange" />
     //
     override func generateSVG() -> String {
-        return "<circle cx=\"\(center.x)\" cy=\"\(center.y)\" r=\"\(diameter.half)\" fill=\"none\" stroke=\"rgb(0,0,0)\" stroke-width=\"1.0\" />"
+        return "<circle cx=\"\(center.x)\" cy=\"\(center.y)\" r=\"\(diameter.half)\" fill=\"none\" stroke=\"rgb(100,0,0)\" stroke-width=\"1.0\" />"
     }
 }

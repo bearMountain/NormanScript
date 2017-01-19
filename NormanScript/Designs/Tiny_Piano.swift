@@ -4,14 +4,51 @@
 
 import Foundation
 
-let LongestReed = 6.0
+// Smallest Steel comb:
+// LongestReed = 1.5
+// 0...6 num reeds (i*2 for every other reed size)
+// BarWidth = 0.2
+// BarSpacer = 0.04
+//
+// Medium Steel comb:
+// LongestReed = 3
+// 0...6 num reeds (i*2 for every other reed size)
+// BarWidth =~ 0.4
+// BarSpacer =~ 0.08
+//
+// Large Steel comb:
+// LongestReed = 6
+// 0...12 num reeds
+// BarWidth =~ 0.4
+// BarSpacer =~ 0.08
+//
+// Small Saw comb:
+// LongestReed = 2
+// 0...6 num reeds (i*2 for every other reed size)
+// BarWidth = 0.2
+// BarSpacer = 0.04
+//
+// Long Saw comb:
+// LongestReed = 4.8
+// 0...6 num reeds (i*2 for every other reed size)
+// BarWidth = 0.2
+// BarSpacer = 0.08
+//
+// Fat Saw comb:
+// LongestReed = 2.5
+// 0...6 num reeds (i*2 for every other reed size)
+// BarWidth = 0.3
+// BarSpacer = 0.08
+
+
+let LongestReed = 2.5
 
 func barHeights() -> [Double] {
     let NoteFraction = 1.0595
     var heights: [Double] = []
     
-    for i in 0...12 {
-        let height = LongestReed/pow(NoteFraction, Double(i))
+    for i in 0...6 {
+        let height = LongestReed/pow(NoteFraction, Double(i*2))
         heights.append(height)
     }
     
@@ -19,9 +56,10 @@ func barHeights() -> [Double] {
 }
 
 func makeComb() {
-    let BarWidth = 0.5
-    let BarSpacer = 0.125
-    let BaseWidth = LongestReed / 3.0
+    let BarWidth = 0.3
+    let BarSpacer = 0.04
+//    let BaseWidth = LongestReed / 2.0
+    let BaseWidth = 0.75
     let TopRadius = BarWidth * 0.2
     let BottomRadius = BarSpacer.half
     
@@ -69,16 +107,18 @@ func makeComb() {
     let comb = Polypath(corners: corners)
     
     let HoleDiameter = 0.25
+    let SmallHoleSpacing = 0.984
+    let holeInset = (x-SmallHoleSpacing).half
     let holeY = baseY - BaseWidth.third
-    let hole1 = Circle(diameter: HoleDiameter, center: p(x*0.8, holeY))
-    let hole2 = Circle(diameter: HoleDiameter, center: p(x*0.2, holeY))
-    
+    let hole1 = Circle(diameter: HoleDiameter, center: p(holeInset, holeY))
+    let hole2 = Circle(diameter: HoleDiameter, center: p(x-holeInset, holeY))
+    hole2.rotate(radians: -35.radians, aroundPoint: hole1.center)
     
     var piece = [comb, hole1, hole2] as [Shape]
     
     piece.mutate { shape in
-        shape.scale(60)
-        shape.translate(p(30,30))
+        shape.scale(90)
+//        shape.translate(p(200,200))
     }
     
     

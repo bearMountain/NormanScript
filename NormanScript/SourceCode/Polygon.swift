@@ -8,6 +8,11 @@ class Polygon: Polyline {
     override func svgBeginningString() -> String {
         return "<polygon points=\""
     }
+    
+    // Copy
+    override func copy() -> Polygon {
+        return Polygon(points: points.map{$0.copy()})
+    }
 }
 
 class Polyline: Shape {
@@ -78,6 +83,18 @@ class Polyline: Shape {
     
     override var minX: Double {
         return points.find(min) { $0.x }
+    }
+    
+    var width: Double {
+        return maxX-minX
+    }
+    
+    var height: Double {
+        return maxY-minY
+    }
+    
+    var center: Point {
+        return p(maxX-width.half, maxY-height.half)
     }
     
     // Copy
