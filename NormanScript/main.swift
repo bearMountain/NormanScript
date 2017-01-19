@@ -10,10 +10,6 @@ import Foundation
 
 
 
-makeComb()
-
-
-
 
 
 

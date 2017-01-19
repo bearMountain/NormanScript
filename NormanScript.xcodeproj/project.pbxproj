@@ -116,8 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				1F11FD461D8DD958008D59A6 /* main.swift */,
-				1F3958381DEE6D560051F044 /* Drawings */,
 				1F11FD651D8E75A9008D59A6 /* Framework */,
+				1F3958381DEE6D560051F044 /* Drawings */,
 			);
 			path = NormanScript;
 			sourceTree = "<group>";

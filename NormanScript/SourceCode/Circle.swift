@@ -6,7 +6,7 @@ import Foundation
 
 
 class Circle: Shape {
-    init(diameter: Double, center: Point) {
+    init(diameter: Double = 10, center: Point = .origin) {
         self.diameter = diameter
         self._center = center
     }
@@ -17,7 +17,7 @@ class Circle: Shape {
             return _center
         }
         set {
-            _center = center
+            _center = newValue
         }
     }
     
@@ -32,20 +32,20 @@ class Circle: Shape {
 
     // Translation
     override func scale(_ factor: Double) {
-        center.scale(factor)
+        _center.scale(factor)
         diameter = diameter*factor
     }
 
     override func translate(_ point: Point) {
-        center.translate(point)
+        _center.translate(point)
     }
     
     override func mirror(plane: Line) {
-        center.mirror(plane: plane)
+        _center.mirror(plane: plane)
     }
     
     override func rotate(radians: Double, aroundPoint point: Point){
-        center.rotate(radians: radians, aroundPoint: point)
+        _center.rotate(radians: radians, aroundPoint: point)
     }
     
     // Location
@@ -63,5 +63,10 @@ class Circle: Shape {
     
     override var minY: Double {
         return _center.y-diameter.half
+    }
+    
+    // Copy
+    override func copy() -> Shape {
+        return Circle(diameter: diameter, center: _center.copy())
     }
 }
