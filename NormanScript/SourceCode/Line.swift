@@ -21,12 +21,8 @@ class Line: Shape {
         // <line x1="50" y1="50" x2="200" y2="200" stroke="blue" stroke-width="4" />
         var svgString = "<line x1=\"\(self.start.x)\" y1=\"\(self.start.y)\" x2=\"\(self.end.x)\" y2=\"\(self.end.y)\" "
         
-        if let strokeColor = style?.strokeColor {
-            svgString.append("stroke=\"\(strokeColor.generateSVG())\" ")
-        }
-        
-        if let strokeWidth = style?.strokeWidth {
-            svgString.append("stroke-width=\"\(strokeWidth)\" ")
+        if let style = style {
+            svgString.append(style.generateSVG())
         }
         
         svgString.append("/>")
@@ -80,6 +76,11 @@ class Line: Shape {
     
     override var minY: Double {
         return [start, end].find(min) { $0.y }
+    }
+    
+    // Copy
+    override func copy() -> Line {
+        return Line(start: start.copy(), end: end.copy(), style: style) 
     }
 }
 

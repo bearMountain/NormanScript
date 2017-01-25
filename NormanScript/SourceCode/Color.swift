@@ -38,6 +38,10 @@ extension Color {
         return c(0.5, 0.5, 0.5)
     }
     
+    static var red: Color {
+        return c(1, 0.2, 0.2)
+    }
+    
     static var blue: Color {
         return c(0.2, 0.2, 1)
     }

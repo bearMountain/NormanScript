@@ -39,25 +39,6 @@ extension String {
     }
 }
 
-extension String {
-    //
-    // <g id="group1" stroke="red" stroke-width="5">
-    // ...
-    // </g>
-    //
-    func groupWithProperties(_ properties: [String: Any]) -> String {
-        var propertiesString = ""
-        for (key, value) in properties {
-            propertiesString += (key + "=\"\(value)\" ")
-        }
-        
-        let begin = "<g \(propertiesString)>"
-        let end = "</g>"
-        
-        return begin + "\n" + self + "\n" + end
-    }
-}
-
 //extension Array where Element: SVGExportable {
 //    func ship() {
 //        self.map{$0.generateSVG()}.joined(separator: "\n").addSVGTags().export()

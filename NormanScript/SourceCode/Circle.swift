@@ -6,9 +6,10 @@ import Foundation
 
 
 class Circle: Shape {
-    init(diameter: Double = 10, center: Point = .origin, strokeColor: Color? = .black, fillColor: Color? = nil, strokeWidth: Double? = 1) {
+    init(diameter: Double = 10, center: Point = .origin, style: Style? = .standard) {
         self.diameter = diameter
         self._center = center
+        self.style = style
     }
     
     var diameter: Double
@@ -28,7 +29,7 @@ class Circle: Shape {
     // SVG Generation
     override func generateSVG() -> String {
         // <circle cx="125" cy="125" r="75" fill="orange" />
-        return "<circle cx=\"\(center.x)\" cy=\"\(center.y)\" r=\"\(diameter.half)\" fill=\"none\" stroke=\"rgb(100,0,0)\" stroke-width=\"1.0\" />"
+        return "<circle cx=\"\(center.x)\" cy=\"\(center.y)\" r=\"\(diameter.half)\" \(style?.generateSVG() ?? "") />"
     }
 
     // Translation
