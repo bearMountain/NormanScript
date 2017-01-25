@@ -5,13 +5,27 @@
 import Foundation
 
 class Trapezoid: Shape {
-    init(corners: [Point], cornerRadius: Double = 0) {
+    init(topWidth: Double, bottomWidth: Double, height: Double, cornerRadius: Double = 0, style: Style? = .standard) {
+        let corners = [
+            p(-bottomWidth.half, height),
+            p(-topWidth.half, 0),
+            p(topWidth.half, 0),
+            p(bottomWidth.half, height)
+        ]
+        
         self.corners = corners
         self.cornerRadius = cornerRadius
+        self.style = style
+    }
+    
+    convenience init(bottomWidth: Double, height: Double, taper: Double, cornerRadius: Double = 0, style: Style? = .standard) {
+        let cuttofWidth = tan(taper.radians)*height
+        self.init(topWidth: bottomWidth-cuttofWidth.doubled, bottomWidth: bottomWidth, height: height, cornerRadius: cornerRadius, style: style)
     }
     
     var corners: [Point]
-    var cornerRadius: Double = 0
+    var cornerRadius: Double
+    var style: Style?
 
     // SVG Generation
     override func generateSVG() -> String {
@@ -31,7 +45,7 @@ class Trapezoid: Shape {
         
         // Path Generation
         let pathStringStart = "<path d=\""
-        let pathStringEnd = "z\" fill=\"none\" stroke=\"black\" stroke-width=\"1\" />"
+        let pathStringEnd = "z\" \(style?.generateSVG() ?? "") />"
         var path = ""
         let radius = cornerRadius
         
@@ -75,6 +89,10 @@ class Trapezoid: Shape {
     override func scale(_ factor: Double) {
         corners.mutate { $0.scale(factor) }
         cornerRadius *= factor
+        
+        if (style?.strokeWidth != nil) {
+            style!.strokeWidth! *= factor
+        }
     }
 
     // Locating
@@ -95,34 +113,9 @@ class Trapezoid: Shape {
     }
     
     // Copy
-    override func copy() -> Trapezoid {
-        return Trapezoid(corners: corners.map{$0.copy()}, cornerRadius: cornerRadius)
-    }
-}
-
-// Convenience Constructors
-func trapezoid(topWidth: Double, bottomWidth: Double, height: Double) -> Trapezoid {
-    let corners = [
-        p(-bottomWidth.half, height),
-        p(-topWidth.half, 0),
-        p(topWidth.half, 0),
-        p(bottomWidth.half, height)
-    ]
-    
-    return Trapezoid(corners: corners, cornerRadius: 0)
-}
-
-func trapezoid(bottomWidth: Double, height: Double, taper: Double) -> Trapezoid {
-    let cuttofWidth = tan(taper.radians)*height
-    
-    let corners = [
-        p(-bottomWidth.half, height),
-        p(-bottomWidth.half+cuttofWidth, 0),
-        p(bottomWidth.half-cuttofWidth, 0),
-        p(bottomWidth.half, height)
-    ]
-    
-    return Trapezoid(corners: corners, cornerRadius: 0)
+//    override func copy() -> Trapezoid {
+//        return Trapezoid(corners: corners.map{$0.copy()}, cornerRadius: cornerRadius)
+//    }
 }
 
 

@@ -17,14 +17,14 @@ func makePaperweight() {
     let spacer = 0.2
     
     // Side Creation
-    let top = Rectangle(length: mainLength, width: mainWidth)
-    let side1 = Rectangle(length: mainWidth, width: mainHeight)
+    let top = Rectangle(width: mainLength, height: mainWidth)
+    let side1 = Rectangle(width: mainWidth, height: mainHeight)
     let side2 = side1.copy()
-    let bottom1 = Rectangle(length: mainWidth, width: legWidth)
+    let bottom1 = Rectangle(width: mainWidth, height: legWidth)
     let bottom2 = bottom1.copy()
-    let innerSide1 = Rectangle(length: mainWidth, width: mainHeight-legWidth)
+    let innerSide1 = Rectangle(width: mainWidth, height: mainHeight-legWidth)
     let innerSide2 = innerSide1.copy()
-    let underside = Rectangle(length: mainLength-legWidth.doubled, width: mainWidth)
+    let underside = Rectangle(width: mainLength-legWidth.doubled, height: mainWidth)
     
     let face1 = Polygon(points: [
         .origin,
