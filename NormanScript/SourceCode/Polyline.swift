@@ -7,9 +7,13 @@ import Foundation
 
 class Polyline: Shape {
     var points: [Point]
+    var style: Style?
     
-    init(points: [Point]) {
+    init(points: [Point], style: Style? = .standard) {
         self.points = points
+        self.style = style
+        
+        self.style?.fillColor = nil
     }
     
     // For subclasses to override
@@ -28,9 +32,9 @@ class Polyline: Shape {
         
         let fullBeginning = svgBeginningString() + pointsString + "\""
         
-        let style = "style=\"fill:none;stroke:black;stroke-width:1\""
+        let styleString = style?.generateSVG() ?? ""
         
-        let element = fullBeginning + " " + style + " />"
+        let element = fullBeginning + " " + styleString + " />"
         
         return element
     }
@@ -57,6 +61,10 @@ class Polyline: Shape {
     override func scale(_ factor: Double) {
         points.mutate { point in
             point.scale(factor)
+        }
+        
+        if (style?.strokeWidth != nil) {
+            style!.strokeWidth! *= factor
         }
     }
     

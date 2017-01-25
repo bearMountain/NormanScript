@@ -6,16 +6,17 @@
 
 
 func trapTest() {
+    let points = [
+        .origin,
+        p(10,0),
+        p(10,20),
+        p(100,100),
+        p(10, 80)
+    ]
+    let poly = Polyline(points: points)
+    poly.scale(3)
     
-    
-    let style = Style(strokeColor: .gray, strokeWidth: 0.5, fillColor: .gray)
-    let trap = Trapezoid(topWidth: 100, bottomWidth: 200, height: 88, cornerRadius: 1, style: style)
-    trap.translate(p(trap.width.half, 0))
-
-    trap.scale(3)
-    trap.translate(p(50, 50))
-    
-    ship(trap)
+    ship(poly)
 }
 
 trapTest()

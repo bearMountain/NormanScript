@@ -10,18 +10,26 @@ enum LineCap: String {
     case round = "round"
 }
 
+enum LineJoin: String {
+    case miter = "miter"
+    case round = "round"
+    case bevel = "bevel"
+}
+
 
 struct Style {
     var strokeColor: Color?
     var strokeWidth: Double?
     var fillColor: Color?
     var lineCap: LineCap?
+    var lineJoin: LineJoin?
     
-    init(strokeColor: Color? = nil, strokeWidth: Double? = nil, fillColor: Color? = nil, lineCap: LineCap? = nil) {
+    init(strokeColor: Color? = nil, strokeWidth: Double? = nil, fillColor: Color? = nil, lineCap: LineCap? = nil, lineJoin: LineJoin? = nil) {
         self.strokeColor = strokeColor
         self.strokeWidth = strokeWidth
         self.fillColor = fillColor
         self.lineCap = lineCap
+        self.lineJoin = lineJoin
     }
 }
 
@@ -40,10 +48,16 @@ extension Style: SVGExportable {
         
         if let fillColor = fillColor {
             svgString.append("fill=\"\(fillColor.generateSVG())\" ")
+        } else {
+            svgString.append("fill=\"none\"  ")
         }
         
         if let lineCap = lineCap {
             svgString.append("stroke-linecap=\"\(lineCap.rawValue)\" ")
+        }
+        
+        if let lineJoin = lineJoin {
+            svgString.append("stroke-linejoin=\"\(lineJoin.rawValue)\" ")
         }
         
         return svgString
@@ -53,7 +67,7 @@ extension Style: SVGExportable {
 // Static Variables
 extension Style {
     static var standard: Style {
-        return Style(strokeColor: .black, strokeWidth: 1, fillColor: .gray, lineCap: .round)
+        return Style(strokeColor: .black, strokeWidth: 1, fillColor: .gray, lineCap: .round, lineJoin: .round)
     }
 }
 
