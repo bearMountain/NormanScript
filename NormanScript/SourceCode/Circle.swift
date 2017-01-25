@@ -12,7 +12,11 @@ class Circle: Shape {
         self.style = style
     }
     
+
     var diameter: Double
+    var radius: Double {
+        return diameter.half
+    }
     var style: Style?
     override var center: Point {
         get {
@@ -29,13 +33,17 @@ class Circle: Shape {
     // SVG Generation
     override func generateSVG() -> String {
         // <circle cx="125" cy="125" r="75" fill="orange" />
-        return "<circle cx=\"\(center.x)\" cy=\"\(center.y)\" r=\"\(diameter.half)\" \(style?.generateSVG() ?? "") />"
+        return "<circle cx=\"\(_center.x)\" cy=\"\(_center.y)\" r=\"\(radius)\" \(style?.generateSVG() ?? "") />"
     }
 
     // Translation
     override func scale(_ factor: Double) {
         _center.scale(factor)
         diameter = diameter*factor
+        
+        if (style?.strokeWidth != nil) {
+            style!.strokeWidth! *= factor
+        }
     }
 
     override func translate(_ point: Point) {

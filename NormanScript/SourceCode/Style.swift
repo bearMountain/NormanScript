@@ -39,7 +39,7 @@ extension Style: SVGExportable {
         }
         
         if let fillColor = fillColor {
-            svgString.append("fill=\"\(fillColor)\" ")
+            svgString.append("fill=\"\(fillColor.generateSVG())\" ")
         }
         
         if let lineCap = lineCap {
