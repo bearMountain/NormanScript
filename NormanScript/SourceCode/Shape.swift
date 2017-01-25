@@ -4,8 +4,12 @@
 
 import Foundation
 
+protocol SVGExportable {
+    func generateSVG() -> String
+}
 
-class Shape {
+
+class Shape: SVGExportable {
     // SVG Generation
     func generateSVG() -> String {
         assertionFailure("Error: Method Unimplimented")

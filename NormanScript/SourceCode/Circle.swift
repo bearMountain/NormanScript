@@ -6,12 +6,13 @@ import Foundation
 
 
 class Circle: Shape {
-    init(diameter: Double = 10, center: Point = .origin) {
+    init(diameter: Double = 10, center: Point = .origin, strokeColor: Color? = .black, fillColor: Color? = nil, strokeWidth: Double? = 1) {
         self.diameter = diameter
         self._center = center
     }
     
     var diameter: Double
+    var style: Style?
     override var center: Point {
         get {
             return _center

@@ -8,12 +8,12 @@ import Foundation
 class Line: Shape {
     var start: Point
     var end: Point
-    var displayProperties: DisplayProperties?
+    var style: Style?
     
-    init(start: Point, end: Point, strokeColor: Color? = .black, strokeWidth: Double? = 1, fillColor: Color? = nil) {
+    init(start: Point, end: Point, style: Style? = .standard) {
         self.start = start
         self.end = end
-        self.displayProperties = DisplayProperties(strokeColor: strokeColor, strokeWidth: strokeWidth, fillColor: fillColor)
+        self.style = style
     }
 
     // SVG Generations
@@ -21,11 +21,11 @@ class Line: Shape {
         // <line x1="50" y1="50" x2="200" y2="200" stroke="blue" stroke-width="4" />
         var svgString = "<line x1=\"\(self.start.x)\" y1=\"\(self.start.y)\" x2=\"\(self.end.x)\" y2=\"\(self.end.y)\" "
         
-        if let strokeColor = displayProperties?.strokeColor {
+        if let strokeColor = style?.strokeColor {
             svgString.append("stroke=\"\(strokeColor.generateSVG())\" ")
         }
         
-        if let strokeWidth = displayProperties?.strokeWidth {
+        if let strokeWidth = style?.strokeWidth {
             svgString.append("stroke-width=\"\(strokeWidth)\" ")
         }
         
@@ -39,6 +39,10 @@ class Line: Shape {
     override func scale(_ factor: Double) {
         start.scale(factor)
         end.scale(factor)
+        
+        if (style?.strokeWidth != nil) {
+            style!.strokeWidth! *= factor
+        }
     }
 
     override func mirror(plane: Line) {

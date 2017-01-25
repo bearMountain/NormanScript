@@ -11,7 +11,7 @@ struct Color {
     var b: Double
 }
 
-extension Color {
+extension Color: SVGExportable {
     //
     // "rgb(205,133,63)"
     //
@@ -24,6 +24,7 @@ func c(_ r: Double, _ g: Double, _ b: Double) -> Color {
     return Color(r: r, g: g, b: b)
 }
 
+// Default Colors
 extension Color {
     static var black: Color {
         return c(0, 0, 0)
@@ -35,6 +36,10 @@ extension Color {
     
     static var gray: Color {
         return c(0.5, 0.5, 0.5)
+    }
+    
+    static var blue: Color {
+        return c(0.2, 0.2, 1)
     }
 }
 
