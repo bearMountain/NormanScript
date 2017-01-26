@@ -12,7 +12,7 @@ class Polygon: Polyline {
     
     // Copy
     override func copy() -> Polygon {
-        return Polygon(points: points.map{$0.copy()})
+        return Polygon(points: points.map{$0.copy()}, style: self.style)
     }
 }
 

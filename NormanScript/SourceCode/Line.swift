@@ -10,7 +10,7 @@ class Line: Shape {
     var end: Point
     var style: Style?
     
-    init(start: Point, end: Point, style: Style? = .standard) {
+    init(start: Point, end: Point, style: Style? = nil) {
         self.start = start
         self.end = end
         self.style = style
