@@ -3,51 +3,44 @@
 import Darwin
 
 let numZigs = 20
-let zigHeight = 100.0
-let zigWaveSpace = 25.0
+let zigHeight = 250.0
+let zigWaveSpace = 11.0
+let paperWidth = 425.0
+let paperHeight = 550.0
 
 
-class IDGenerator {
-    static var shared = IDGenerator()
-    
-    func make() -> String {
-        n += 1
-        return "\(n)"
+
+class ColorPalette {
+    func nextColor() -> Color {
+        if let next = workingSet.popLast() {
+            return next
+        } else {
+            workingSet = colors.shuffled()
+            return nextColor()
+        }
     }
     
-    private var n: Int = -1
+    
+    
+    // Private Vars
+    private var workingSet: [Color] = []
+    private let colors = [
+        color255(61, 93, 127),  // Navy
+        color255(118, 177, 96), // Green
+        color255(214, 174, 92), // Orange
+        color255(62, 60, 49),   // Black
+        color255(218, 201, 191),// Beige
+        color255(227, 200, 69), // Yellow
+        color255(169, 116, 90), // Brown
+        color255(218, 105, 69), // Burnt Orange
+        color255(146, 170, 188),// Light Blue
+        color255(177, 135, 177),// Purple
+    ]
 }
 
-class ClippedShape: Shape {
-    var shape: Shape
-    var clipPath: Shape
-    
-    init(shape: Shape, clipPath: Shape) {
-        self.shape = shape
-        self.clipPath = clipPath
-    }
-    
-    // SVG Generation
-    override func generateSVG() -> String {
-        //<defs>
-        //  <clipPath id="cut-off-bottom">
-        //      <rect x="0" y="0" width="200" height="100" />
-        //  </clipPath>
-        //</defs>
-        //
-        //<circle cx="100" cy="100" r="100" clip-path="url(#cut-off-bottom)" />
-        let clipPathID = IDGenerator.shared.make()
-        shape.style?.clipPathID = clipPathID
-        let header = "<defs>\n<clipPath id=\"\(clipPathID)\">"
-        let footer = "</clipPath>\n</defs>"
-        let defs = header + "\n" + clipPath.generateSVG() + "\n" + footer
-        let clippedShapeSVG = defs + "\n" + shape.generateSVG()
-        
-        return clippedShapeSVG
-    }
-}
 
-func makeZigs() {
+
+func makeMoDrawing() {
     let zig = makeZig()
     
     // Viewable
@@ -67,8 +60,7 @@ func makeZigs() {
 
 func makePaperAndClipper() -> (Shape, Shape) {
     let paperStyle = Style(fillColor: .beige)
-    let paper = Rectangle(width: 850, height: 1100, cornerRadius: 30, style: paperStyle)
-    paper.scale(0.5)
+    let paper = Rectangle(width: paperWidth, height: paperHeight, cornerRadius: 30, style: paperStyle)
     
     paper.translate(p(paper.width.half, 0))
     
@@ -85,14 +77,14 @@ func makePaperAndClipper() -> (Shape, Shape) {
 }
 
 func makeZig() -> Shape {
-    let lines = makeLines(numZigs: 20, zigHeight: 250, zigWaveSpace: 11)
+    let lines = makeZigLines(numZigs: numZigs, zigHeight: zigHeight, zigWaveSpace: zigWaveSpace)
     let drawableLines = Group(shapes: lines, style: Style(strokeColor: .gray, strokeWidth: 12, lineJoin: .bevel))
     drawableLines.translate(p(-drawableLines.width.half, -drawableLines.height.half))
     
     return drawableLines
 }
 
-func makeLines(numZigs: Int, zigHeight: Double, zigWaveSpace: Double) -> [Line] {
+func makeZigLines(numZigs: Int, zigHeight: Double, zigWaveSpace: Double) -> [Line] {
     var lines: [Line] = []
     
     var x: Double = 0
@@ -113,19 +105,52 @@ func makeLines(numZigs: Int, zigHeight: Double, zigWaveSpace: Double) -> [Line] 
     return lines
 }
 
-
-func zigTest() {
-    let z1 = makeZig()
-    let z2 = makeZig()
+func makeGrid() {
+    let baseWidth = 11
+    let numRows = 10
+    let xSpacer = zigWaveSpace*Double(numZigs)
+    let ySpacer = zigHeight
     
-    z1.translate(p(z1.width, z1.height))
-    z2.translate(p(z1.width*2, z1.height))
+    let colorPalette = ColorPalette()
     
-    let zigs = Group(shapes: [z1, z2])
-
+    let pyramidSpacing = [3, 6, 9, 9, 11, 11, 11, 11, 11, 11]
     
-    ship(zigs)
+    var dots: [Shape] = []
+    for y in 0..<numRows {
+        for x in 0..<baseWidth {
+            let currentPyramid = pyramidSpacing[y]
+            if abs(x-5) > currentPyramid/2 {
+                continue
+            }
+            
+            let center = p(xSpacer*Double(x), ySpacer*Double(y))
+            let zig = makeZig()
+            zig.translate(center)
+            zig.style?.strokeColor = colorPalette.nextColor()
+            
+            dots.append(zig)
+        }
+    }
+    
+    let grid = Group(shapes: dots)
+    
+    let scale = paperWidth/grid.width
+    grid.scale(scale)
+    
+    let inset = 30.0
+    grid.translate(p(inset, inset))
+    
+    ship(grid)
 }
 
-makeZigs()
+makeGrid()
+
+
+
+
+
+
+
+
+
 

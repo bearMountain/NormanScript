@@ -24,6 +24,10 @@ func c(_ r: Double, _ g: Double, _ b: Double) -> Color {
     return Color(r: r, g: g, b: b)
 }
 
+func color255(_ r: Double, _ g: Double, _ b: Double) -> Color {
+    return Color(r: r/255.0, g: g/255.0, b: b/255.0)
+}
+
 // Default Colors
 extension Color {
     static var black: Color {
