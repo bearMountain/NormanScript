@@ -55,14 +55,24 @@ func makeZigs() {
     zig.translate(p(zig.width.half+inset, zig.height.half+inset))
     
     // Make sheet of paper
+    let (paper, paperClipper) = makePaperAndClipper()
+    
+    let clippedZig = ClippedShape(shape: zig, clipPath: paperClipper)
+    
+    let piece = [paper, clippedZig]
+    
+    
+    ship(piece)
+}
+
+func makePaperAndClipper() -> (Shape, Shape) {
     let paperStyle = Style(fillColor: .beige)
     let paper = Rectangle(width: 850, height: 1100, cornerRadius: 30, style: paperStyle)
     paper.scale(0.5)
     
-    let paperInset = 0.0
-    paper.translate(p(paper.width.half+paperInset, paperInset))
+    paper.translate(p(paper.width.half, 0))
     
-    let clipperWidthInset = paper.width * 0.1
+    let clipperWidthInset = paper.width * 0.03
     let paperClipper = Rectangle(width: paper.width-clipperWidthInset,
                                  height: paper.height-clipperWidthInset,
                                  cornerRadius: paper.cornerRadius,
@@ -71,12 +81,7 @@ func makeZigs() {
     let paperClipperInset = p((paper.width-paperClipper.width).half, (paper.height-paperClipper.height).half)
     paperClipper.translate(paperClipperInset)
     
-    let clippedZig = ClippedShape(shape: zig, clipPath: paperClipper)
-    
-    let piece = [paper, clippedZig]
-    
-    
-    ship(piece)
+    return (paper, paperClipper)
 }
 
 func makeZig() -> Shape {
