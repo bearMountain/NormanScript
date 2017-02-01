@@ -10,6 +10,9 @@ protocol SVGExportable {
 
 
 class Shape: SVGExportable {
+    // Style
+    var style: Style?
+    
     // SVG Generation
     func generateSVG() -> String {
         assertionFailure("Error: Method Unimplimented")

@@ -7,7 +7,6 @@ import Foundation
 
 class Group: Shape {
     //MARK: - Public Vars
-    var style: Style?
     var shapes: [Shape] {
         didSet {
             validateShapes()
@@ -16,8 +15,8 @@ class Group: Shape {
     
     init(shapes: [Shape], style: Style? = nil) {
         self.shapes = shapes
-        self.style = style
         super.init()
+        self.style = style
         
         validateShapes()
     }

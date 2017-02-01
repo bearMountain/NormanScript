@@ -45,6 +45,14 @@ extension Color {
     static var blue: Color {
         return c(0.2, 0.2, 1)
     }
+    
+    static var beige: Color {
+        return c(0.843, 0.831, 0.819)
+    }
+    
+    static var green: Color {
+        return c(0.474, 0.674, 0.372)
+    }
 }
 
 

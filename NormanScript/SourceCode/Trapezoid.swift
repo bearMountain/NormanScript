@@ -5,7 +5,7 @@
 import Foundation
 
 class Trapezoid: Shape {
-    init(topWidth: Double, bottomWidth: Double, height: Double, cornerRadius: Double = 0, style: Style? = .standard) {
+    init(topWidth: Double, bottomWidth: Double, height: Double, cornerRadius: Double = 0, style: Style? = nil) {
         let corners = [
             p(-bottomWidth.half, height),
             p(-topWidth.half, 0),
@@ -15,6 +15,7 @@ class Trapezoid: Shape {
         
         self.corners = corners
         self.cornerRadius = cornerRadius
+        super.init()
         self.style = style
     }
     
@@ -25,7 +26,6 @@ class Trapezoid: Shape {
     
     var corners: [Point]
     var cornerRadius: Double
-    var style: Style?
 
     // SVG Generation
     override func generateSVG() -> String {
@@ -113,9 +113,11 @@ class Trapezoid: Shape {
     }
     
     // Copy
-//    override func copy() -> Trapezoid {
-//        return Trapezoid(corners: corners.map{$0.copy()}, cornerRadius: cornerRadius)
-//    }
+    override func copy() -> Trapezoid {
+        let trap = Trapezoid(topWidth: 0, bottomWidth: 0, height: 0, cornerRadius: cornerRadius, style: style)
+        trap.corners = corners.map{$0.copy()}
+        return trap
+    }
 }
 
 

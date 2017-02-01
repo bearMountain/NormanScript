@@ -23,13 +23,21 @@ struct Style {
     var fillColor: Color?
     var lineCap: LineCap?
     var lineJoin: LineJoin?
+    var clipPathID: String?
     
-    init(strokeColor: Color? = nil, strokeWidth: Double? = nil, fillColor: Color? = nil, lineCap: LineCap? = nil, lineJoin: LineJoin? = nil) {
+    init(strokeColor: Color? = nil,
+         strokeWidth: Double? = nil,
+         fillColor: Color? = nil,
+         lineCap: LineCap? = nil,
+         lineJoin: LineJoin? = nil,
+         clipPathID: String? = nil)
+    {
         self.strokeColor = strokeColor
         self.strokeWidth = strokeWidth
         self.fillColor = fillColor
         self.lineCap = lineCap
         self.lineJoin = lineJoin
+        self.clipPathID = clipPathID
     }
 }
 
@@ -58,6 +66,10 @@ extension Style: SVGExportable {
         
         if let lineJoin = lineJoin {
             svgString.append("stroke-linejoin=\"\(lineJoin.rawValue)\" ")
+        }
+        
+        if let clipPathID = clipPathID {
+            svgString.append("clip-path=\"url(#\(clipPathID))\" ")
         }
         
         return svgString

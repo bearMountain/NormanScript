@@ -8,11 +8,11 @@ import Foundation
 class Line: Shape {
     var start: Point
     var end: Point
-    var style: Style?
     
     init(start: Point, end: Point, style: Style? = nil) {
         self.start = start
         self.end = end
+        super.init()
         self.style = style
     }
 

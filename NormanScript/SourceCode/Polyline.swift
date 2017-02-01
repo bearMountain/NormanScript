@@ -7,12 +7,11 @@ import Foundation
 
 class Polyline: Shape {
     var points: [Point]
-    var style: Style?
     
     init(points: [Point], style: Style? = .standard) {
         self.points = points
+        super.init()
         self.style = style
-        
         self.style?.fillColor = nil
     }
     

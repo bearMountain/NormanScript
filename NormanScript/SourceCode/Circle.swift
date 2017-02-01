@@ -9,6 +9,7 @@ class Circle: Shape {
     init(diameter: Double = 10, center: Point = .origin, style: Style? = .standard) {
         self.diameter = diameter
         self._center = center
+        super.init()
         self.style = style
     }
     
@@ -17,7 +18,6 @@ class Circle: Shape {
     var radius: Double {
         return diameter.half
     }
-    var style: Style?
     override var center: Point {
         get {
             return _center
