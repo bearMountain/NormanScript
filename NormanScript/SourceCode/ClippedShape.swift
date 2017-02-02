@@ -29,6 +29,10 @@ class ClippedShape: Shape {
         }
         
         let clipPathID = IDGenerator.shared.make()
+        if (shape.style == nil) {
+            shape.style = Style()
+        }
+        
         shape.style?.clipPathID = clipPathID
         let header = "<defs>\n<clipPath id=\"\(clipPathID)\">"
         let footer = "</clipPath>\n</defs>"

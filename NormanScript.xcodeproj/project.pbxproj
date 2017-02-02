@@ -18,6 +18,7 @@
 		1F1D10BB1E31635400C3C0DD /* Polyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1D10BA1E31635400C3C0DD /* Polyline.swift */; };
 		1F1D10BE1E316CDB00C3C0DD /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1D10BD1E316CDB00C3C0DD /* Color.swift */; };
 		1F1DE6F21E4253D200E4E354 /* ClippedShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DE6F11E4253D200E4E354 /* ClippedShape.swift */; };
+		1F1DE6F41E4317CF00E4E354 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1DE6F31E4317CF00E4E354 /* ColorPalette.swift */; };
 		1F39582A1DE7DCB50051F044 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3958291DE7DCB50051F044 /* Matrix.swift */; };
 		1F39582C1DE7E9580051F044 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F39582B1DE7E9580051F044 /* Point.swift */; };
 		1F43A7381E27EEB600B7CA9D /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F43A7371E27EEB600B7CA9D /* Rectangle.swift */; };
@@ -61,6 +62,7 @@
 		1F1D10BA1E31635400C3C0DD /* Polyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Polyline.swift; path = SourceCode/Polyline.swift; sourceTree = "<group>"; };
 		1F1D10BD1E316CDB00C3C0DD /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Color.swift; path = SourceCode/Color.swift; sourceTree = "<group>"; };
 		1F1DE6F11E4253D200E4E354 /* ClippedShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClippedShape.swift; path = SourceCode/ClippedShape.swift; sourceTree = "<group>"; };
+		1F1DE6F31E4317CF00E4E354 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorPalette.swift; path = SourceCode/ColorPalette.swift; sourceTree = "<group>"; };
 		1F3958291DE7DCB50051F044 /* Matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Matrix.swift; path = SourceCode/Matrix.swift; sourceTree = "<group>"; };
 		1F39582B1DE7E9580051F044 /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Point.swift; path = SourceCode/Point.swift; sourceTree = "<group>"; };
 		1F3958361DEE6AB90051F044 /* Polygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Polygon.swift; path = SourceCode/Polygon.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				1FCC0CD91E39403600A604E2 /* Group.swift */,
 				1F1DE6F11E4253D200E4E354 /* ClippedShape.swift */,
 				1F39583B1DEE6F100051F044 /* _Pentagon.swift */,
+				1F1DE6F31E4317CF00E4E354 /* ColorPalette.swift */,
 			);
 			name = Primitives;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				1F11FD471D8DD958008D59A6 /* main.swift in Sources */,
 				1F43A73A1E27EED600B7CA9D /* Paperweight.swift in Sources */,
 				1F5487A11E17982200FD4D59 /* SVGPath.swift in Sources */,
+				1F1DE6F41E4317CF00E4E354 /* ColorPalette.swift in Sources */,
 				1FCC0CDA1E39403600A604E2 /* Group.swift in Sources */,
 				1F54879E1E16CACC00FD4D59 /* Circle.swift in Sources */,
 				1F5487A31E17A2B100FD4D59 /* Corner.swift in Sources */,

@@ -51,7 +51,11 @@ extension Color {
     }
     
     static var beige: Color {
-        return c(0.843, 0.831, 0.819)
+        return color255(216, 212, 209)
+    }
+    
+    static var slate: Color {
+        return color255(40, 43, 53)
     }
     
     static var green: Color {

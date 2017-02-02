@@ -4,67 +4,29 @@ import Darwin
 
 let numZigs = 20
 let zigHeight = 250.0
-let zigWaveSpace = 11.0
+let zigWaveSpace = 12.0
+let zigStrokeWidth = 14.0
+
 let paperWidth = 425.0
 let paperHeight = 550.0
-
-
-
-class ColorPalette {
-    func nextColor() -> Color {
-        if let next = workingSet.popLast() {
-            return next
-        } else {
-            workingSet = colors.shuffled()
-            return nextColor()
-        }
-    }
-    
-    
-    
-    // Private Vars
-    private var workingSet: [Color] = []
-    private let colors = [
-        color255(61, 93, 127),  // Navy
-        color255(118, 177, 96), // Green
-        color255(214, 174, 92), // Orange
-        color255(62, 60, 49),   // Black
-        color255(218, 201, 191),// Beige
-        color255(227, 200, 69), // Yellow
-        color255(169, 116, 90), // Brown
-        color255(218, 105, 69), // Burnt Orange
-        color255(146, 170, 188),// Light Blue
-        color255(177, 135, 177),// Purple
-    ]
-}
-
+let paperRadius = 5.0
 
 
 func makeMoDrawing() {
-    let zig = makeZig()
-    
-    // Viewable
-    let inset = 0.0
-    zig.translate(p(zig.width.half+inset, zig.height.half+inset))
-    
-    // Make sheet of paper
     let (paper, paperClipper) = makePaperAndClipper()
-    
-    let clippedZig = ClippedShape(shape: zig, clipPath: paperClipper)
-    
+    let clippedZig = ClippedShape(shape: makeGrid(), clipPath: paperClipper)
     let piece = [paper, clippedZig]
-    
     
     ship(piece)
 }
 
 func makePaperAndClipper() -> (Shape, Shape) {
-    let paperStyle = Style(fillColor: .beige)
-    let paper = Rectangle(width: paperWidth, height: paperHeight, cornerRadius: 30, style: paperStyle)
+    let paperStyle = Style(fillColor: .slate)
+    let paper = Rectangle(width: paperWidth, height: paperHeight, cornerRadius: paperRadius, style: paperStyle)
     
     paper.translate(p(paper.width.half, 0))
     
-    let clipperWidthInset = paper.width * 0.03
+    let clipperWidthInset = paper.width * 0.01
     let paperClipper = Rectangle(width: paper.width-clipperWidthInset,
                                  height: paper.height-clipperWidthInset,
                                  cornerRadius: paper.cornerRadius,
@@ -78,7 +40,7 @@ func makePaperAndClipper() -> (Shape, Shape) {
 
 func makeZig() -> Shape {
     let lines = makeZigLines(numZigs: numZigs, zigHeight: zigHeight, zigWaveSpace: zigWaveSpace)
-    let drawableLines = Group(shapes: lines, style: Style(strokeColor: .gray, strokeWidth: 12, lineJoin: .bevel))
+    let drawableLines = Group(shapes: lines, style: Style(strokeColor: .gray, strokeWidth: zigStrokeWidth, lineJoin: .bevel))
     drawableLines.translate(p(-drawableLines.width.half, -drawableLines.height.half))
     
     return drawableLines
@@ -105,7 +67,7 @@ func makeZigLines(numZigs: Int, zigHeight: Double, zigWaveSpace: Double) -> [Lin
     return lines
 }
 
-func makeGrid() {
+func makeGrid() -> Shape {
     let baseWidth = 11
     let numRows = 10
     let xSpacer = zigWaveSpace*Double(numZigs)
@@ -135,15 +97,15 @@ func makeGrid() {
     let grid = Group(shapes: dots)
     
     let scale = paperWidth/grid.width
-    grid.scale(scale)
+    grid.scale(scale+0.03)
+
+    grid.rotate(degrees: 40, aroundPoint: p(grid.minX, grid.maxY))
+    grid.translate(p(-240, -100))
     
-    let inset = 30.0
-    grid.translate(p(inset, inset))
-    
-    ship(grid)
+    return grid
 }
 
-makeGrid()
+makeMoDrawing()
 
 
 
