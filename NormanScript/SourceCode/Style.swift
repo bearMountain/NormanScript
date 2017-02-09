@@ -19,22 +19,28 @@ enum LineJoin: String {
 
 struct Style {
     var strokeColor: Color?
+    var strokeOpacity: Double?
     var strokeWidth: Double?
     var fillColor: Color?
+    var fillOpacity: Double?
     var lineCap: LineCap?
     var lineJoin: LineJoin?
     var clipPathID: String?
     
     init(strokeColor: Color? = nil,
+         strokeOpacity: Double? = nil,
          strokeWidth: Double? = nil,
          fillColor: Color? = nil,
+         fillOpacity: Double? = nil,
          lineCap: LineCap? = nil,
          lineJoin: LineJoin? = nil,
          clipPathID: String? = nil)
     {
         self.strokeColor = strokeColor
+        self.strokeOpacity = strokeOpacity
         self.strokeWidth = strokeWidth
         self.fillColor = fillColor
+        self.fillOpacity = fillOpacity
         self.lineCap = lineCap
         self.lineJoin = lineJoin
         self.clipPathID = clipPathID
@@ -50,6 +56,10 @@ extension Style: SVGExportable {
             svgString.append("stroke=\"\(strokeColor.generateSVG())\" ")
         }
         
+        if let strokeOpacity = strokeOpacity {
+            svgString.append("stroke-opacity=\"\(strokeOpacity)\" ")
+        }
+        
         if let strokeWidth = strokeWidth {
             svgString.append("stroke-width=\"\(strokeWidth)\" ")
         }
@@ -58,6 +68,10 @@ extension Style: SVGExportable {
             svgString.append("fill=\"\(fillColor.generateSVG())\" ")
         } else {
             svgString.append("fill=\"none\"  ")
+        }
+        
+        if let fillOpacity = fillOpacity {
+            svgString.append("fill-opacity=\"\(fillOpacity)\" ")
         }
         
         if let lineCap = lineCap {

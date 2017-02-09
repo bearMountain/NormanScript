@@ -41,6 +41,9 @@ import Foundation
 // BarSpacer = 0.08
 
 
+
+// LongestReed / NoteFraction^i
+
 let LongestReed = 2.5
 
 func barHeights() -> [Double] {
@@ -58,7 +61,6 @@ func barHeights() -> [Double] {
 func makeComb() {
     let BarWidth = 0.3
     let BarSpacer = 0.04
-//    let BaseWidth = LongestReed / 2.0
     let BaseWidth = 0.75
     let TopRadius = BarWidth * 0.2
     let BottomRadius = BarSpacer.half
@@ -118,14 +120,13 @@ func makeComb() {
     
     piece.mutate { shape in
         shape.scale(90)
-//        shape.translate(p(200,200))
     }
     
-    
-    
-//    polypath.translate(p(10,10))
-//    polypath.scale(2)
-    
+    hole1.style?.strokeWidth = 1
+    hole1.style?.fillColor = nil
+    hole2.style?.strokeWidth = 1
+    hole2.style?.fillColor = nil
+
     
     ship(piece)
 }

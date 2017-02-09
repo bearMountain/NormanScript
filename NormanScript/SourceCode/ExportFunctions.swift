@@ -47,7 +47,7 @@ extension String {
 
 func ship(_ shapes: [Shape]) {
     shapes.map{$0.generateSVG()}.joined(separator: "\n").addSVGTags().export()
-    print("Shipped sucka.")
+    print("Shipped!")
 }
 
 
