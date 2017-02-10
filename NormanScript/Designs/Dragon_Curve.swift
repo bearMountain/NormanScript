@@ -4,46 +4,88 @@
 
 import Foundation
 
+
+func reverse(line: [Line]) -> [Line] {
+    var copy = Array(line.reversed())
+    copy.mutate { line in
+        let point = line.start
+        line.start = line.end
+        line.end = point
+    }
+    
+    return copy
+}
+
 func makeDragonCurve() {
     let segmentLength = 5.0
-    let translatedOrigin = p(600, 300)
-    let origin = p(0,0)
-    let strokeColor = c(0,0,0)
-    let strokeWidth = 1.5
     
-    let s1 = LineSegment(start: p(segmentLength, 0), end: origin, strokeColor: strokeColor, strokeWidth: strokeWidth)
-    var l1 = Line(segments: [s1])
+    let lineStyle = Style(strokeWidth: 2)
+    let line = Line(start: .origin, end: p(segmentLength, 0), style: lineStyle)
+    var lines: [Line] = [line]
     
-    for _ in 0..<10 {
-        // Duplicate Line
-        var l2 = l1
+    for _ in 0..<19 {
+        let reversedLines = reverse(line: lines)
+        var linesCopy = reversedLines.map{ $0.copy() }
         
-        // Rotate Line around previous line endpoint
-        l2.rotate(radians: Double.pi.half*1.2, aroundPoint: l1.endpoint)
+        linesCopy.mutate { line in
+            line.rotate(degrees: 90, aroundPoint: lines.last!.end)
+        }
         
-        // Reverse l2 point ordering
-        l2.reverse()
-        
-        // Join lines
-        l1 = Line(segments: l1.segments+l2.segments)
+        lines = lines + linesCopy
     }
     
-    
-    var color = c(0,1,0.5)
-    let colorIncriment = 1.0/Double(l1.segments.count)
-    for i in 0..<l1.segments.count {
-        l1.segments[i].displayProperties?.strokeColor = color
-        color.r += colorIncriment
-        color.g -= colorIncriment
-        color.b += colorIncriment.half
+    lines.mutate { line in
+        line.translate(p(900,500))
     }
     
-    var l3 = l1
-    l3.rotate(radians: Double.pi.half.half, aroundPoint: origin)
-    l3.translate(translatedOrigin)
+    var c = Color.black
     
+    let palette = ColorPalette()
     
-    l1.translate(translatedOrigin)
+    for line in lines {
+        c.b += 0.0001
+        line.style?.strokeColor = palette.nextColor()
+    }
+
     
-    ship(shapes: [l1])
+    ship(lines)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
